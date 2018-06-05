@@ -1,18 +1,21 @@
 {
-  "name": "ow-core",
+  "name": "@ow-framework/core",
   "version": "1.0.0",
   "description": "",
   "main": "dist/index.js",
-  "types": "src/index.d.ts",
+  "types": "src/types.ts",
   "scripts": {
     "build": "tsc",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
-  "author": "",
+  "author": "flipace <neschkudla@gmail.com>",
   "license": "MIT",
   "devDependencies": {
     "@types/node": "^10.3.0",
     "typescript": "^2.9.1"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }
