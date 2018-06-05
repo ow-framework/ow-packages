@@ -1,9 +1,10 @@
 {
-  "name": "ow-hello-world",
+  "name": "@ow-framework/hello-world",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "dist/index.js",
   "scripts": {
+    "build": "tsc",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -12,5 +13,14 @@
   "devDependencies": {
     "@types/node": "^10.3.0",
     "typescript": "^2.9.1"
+  },
+  "peerDependencies": {
+    "@ow-framework/core": "^1.0.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "dependencies": {
+    "@ow-framework/core": "^1.0.1"
   }
 }
