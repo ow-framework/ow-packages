@@ -9,19 +9,11 @@ var __assign = (this && this.__assign) || Object.assign || function(t) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 function noop() { }
-function getThenable() { return Promise.resolve(); }
-var noopLogger = {
-    info: noop,
-    log: noop,
-    debug: noop,
-    error: noop,
-    warn: noop,
-};
-function unhandledRejection(logger, error) {
-    logger.error(error);
+function getThenable() {
+    return Promise.resolve();
 }
-var Application = /** @class */ (function () {
-    function Application(_a) {
+var OwInstance = /** @class */ (function () {
+    function OwInstance(_a) {
         var _b = (_a === void 0 ? {} : _a).silent, silent = _b === void 0 ? false : _b;
         this.env = process.env;
         this.logger = console;
@@ -44,26 +36,27 @@ var Application = /** @class */ (function () {
         }
         this.unhandledRejectionHandler = unhandledRejection.bind(this, this.logger);
         process.on('unhandledRejection', this.unhandledRejectionHandler);
+        return this;
     }
-    Application.prototype.on = function (eventName, fn) {
+    OwInstance.prototype.on = function (eventName, fn) {
         var _a;
         this.listeners = __assign({}, this.listeners, (_a = {}, _a[eventName] = this.listeners[eventName].concat([fn]), _a));
         return this;
     };
-    Application.prototype.off = function (eventName, fn) {
+    OwInstance.prototype.off = function (eventName, fn) {
         if (this.listeners[eventName]) {
             this.listeners[eventName] = this.listeners[eventName].filter(function (cb) { return cb !== fn; }).slice();
         }
         return this;
     };
-    Application.prototype.trigger = function (eventName) {
+    OwInstance.prototype.trigger = function (eventName) {
         this.logger.debug("Event \"" + eventName + "\" fired");
         if (this.listeners[eventName]) {
             this.listeners[eventName].forEach(function (fn) { return fn(); });
         }
         return this;
     };
-    Application.prototype.addModules = function (modules) {
+    OwInstance.prototype.addModules = function (modules) {
         var _this = this;
         var self = this;
         var newModules = modules.reduce(function (acc, passedModule) {
@@ -86,7 +79,7 @@ var Application = /** @class */ (function () {
             .then(function () { return _this._triggerModules('load', newModules); })
             .then(function () { return _this; });
     };
-    Application.prototype._triggerModules = function (event, modules) {
+    OwInstance.prototype._triggerModules = function (event, modules) {
         var _this = this;
         if (modules === void 0) { modules = this.modules; }
         this.logger.debug("Triggering \"" + event + "\" on modules...");
@@ -120,7 +113,7 @@ var Application = /** @class */ (function () {
             return resolve();
         });
     };
-    Application.prototype.start = function () {
+    OwInstance.prototype.start = function () {
         var _this = this;
         this.logger.info(this.started ? "Restarting ow application" : "Starting ow application.");
         var before = Promise.resolve();
@@ -140,14 +133,25 @@ var Application = /** @class */ (function () {
                 'There is likely more logging output above.');
         });
     };
-    Application.prototype.stop = function () {
+    OwInstance.prototype.stop = function () {
         process.removeListener('unhandledRejection', this.unhandledRejectionHandler);
         if (this.started) {
             return this._triggerModules('unload', this.modules);
         }
         return Promise.resolve();
     };
-    return Application;
+    return OwInstance;
 }());
-exports.Application = Application;
+var noopLogger = {
+    info: noop,
+    log: noop,
+    debug: noop,
+    error: noop,
+    warn: noop,
+};
+function unhandledRejection(logger, error) {
+    logger.error(error);
+}
+var OwConstructor = OwInstance;
+exports.default = OwConstructor;
 //# sourceMappingURL=Ow.js.map

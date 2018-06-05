@@ -1,2 +1,4 @@
-export { Application as default, IOwApplication } from './Ow';
-export { OwModule, IOwModule } from './OwModule';
+import Ow from './Ow';
+export { ApplicationInstance, ModuleInstance, } from './types';
+export { default as OwModule } from './OwModule';
+export default Ow;

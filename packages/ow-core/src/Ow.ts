@@ -1,46 +1,19 @@
-/// <reference path="./OwModule.ts" />
-import { OwModule, IOwModule } from './OwModule';
-
-export type Events = 'load' | 'ready' | 'unload' | '_ensureDependencies';
-
-export type ListenerMap = {
-  load: Function[];
-  ready: Function[];
-  unload: Function[];
-  _ensureDependencies: Function[];
-};
-
-export type ModuleMap = { [key: string]: OwModule };
-
-export type ModelMap = {
-  [key: string]: object;
-};
-
-export interface IOwApplication {
-  env: { [key: string]: string | undefined };
-  logger: Console;
-  logLevel: string;
-
-  modules: ModuleMap;
-  models: ModelMap;
-}
+import {
+  Events,
+  ModuleInstance,
+  ModuleConstructor,
+  ModuleMap,
+  ModelMap,
+  ListenerMap,
+  ApplicationInstance,
+  ApplicationConstructor
+} from './types';
 
 function noop(): void {}
-function getThenable(): Promise<void> { return Promise.resolve(); }
-
-const noopLogger = <Console>{
-  info: noop,
-  log: noop,
-  debug: noop,
-  error: noop,
-  warn: noop,
-};
-
-function unhandledRejection(logger: Console, error: Error) {
-  logger.error(error);
+function getThenable(): Promise<void> {
+  return Promise.resolve();
 }
-
-export class Application implements IOwApplication {
+class OwInstance implements ApplicationInstance {
   env = process.env;
   logger = console;
   logLevel = process.env.LOG_LEVEL || 'info';
@@ -69,9 +42,11 @@ export class Application implements IOwApplication {
     this.unhandledRejectionHandler = unhandledRejection.bind(this, this.logger);
 
     process.on('unhandledRejection', this.unhandledRejectionHandler);
+
+    return this;
   }
 
-  on(eventName: Events, fn: Function): Application {
+  on(eventName: Events, fn: Function): ApplicationInstance {
     this.listeners = {
       ...this.listeners,
       [eventName]: [...this.listeners[eventName], fn],
@@ -80,7 +55,7 @@ export class Application implements IOwApplication {
     return this;
   }
 
-  off(eventName: Events, fn: Function): Application {
+  off(eventName: Events, fn: Function): ApplicationInstance {
     if (this.listeners[eventName]) {
       this.listeners[eventName] = [
         ...this.listeners[eventName].filter(cb => cb !== fn),
@@ -90,7 +65,7 @@ export class Application implements IOwApplication {
     return this;
   }
 
-  trigger(eventName: Events): Application {
+  trigger(eventName: Events): ApplicationInstance {
     this.logger.debug(`Event "${eventName}" fired`);
 
     if (this.listeners[eventName]) {
@@ -100,25 +75,28 @@ export class Application implements IOwApplication {
     return this;
   }
 
-  addModules(modules: OwModule[]) {
+  addModules(modules: ModuleInstance[]) {
     const self = this;
-    const newModules = modules.reduce((acc: ModuleMap, passedModule: IOwModule | OwModule) => {
-      const name = passedModule.name;
+    const newModules = modules.reduce(
+      (acc: ModuleMap, passedModule: ModuleInstance | ModuleConstructor) => {
+        const name = passedModule.name;
 
-      if (typeof passedModule === 'function') {
-        const m = new passedModule(self);
-        acc[name] = m;
-      } else {
-        acc[name] = passedModule;
-      }
+        if (typeof passedModule === 'function') {
+          const m = new passedModule(self);
+          acc[name] = m;
+        } else {
+          acc[name] = passedModule;
+        }
 
-      // make sure module has a name
-      if (typeof acc[name].name === 'undefined') {
-        acc[name].name = name;
-      }
+        // make sure module has a name
+        if (typeof acc[name].name === 'undefined') {
+          acc[name].name = name;
+        }
 
-      return acc;
-    }, {});
+        return acc;
+      },
+      {},
+    );
 
     this.modules = { ...this.modules, ...newModules };
 
@@ -136,7 +114,7 @@ export class Application implements IOwApplication {
 
     return new Promise((resolve, reject) => {
       if (modulesToHandle.length) {
-        const triggerModule = (module: OwModule): Promise<void> => {
+        const triggerModule = (module: ModuleInstance): Promise<void> => {
           this.logger.debug(`${event}: "${module.name}"`);
 
           // @ts-ignore
@@ -211,3 +189,18 @@ export class Application implements IOwApplication {
     return Promise.resolve();
   }
 }
+
+const noopLogger = <Console>{
+  info: noop,
+  log: noop,
+  debug: noop,
+  error: noop,
+  warn: noop,
+};
+
+function unhandledRejection(logger: Console, error: Error) {
+  logger.error(error);
+}
+
+const OwConstructor: ApplicationConstructor = OwInstance; 
+export default OwConstructor;
