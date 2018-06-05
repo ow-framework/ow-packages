@@ -36,7 +36,7 @@ export default class OwKoa extends OwModule {
 
   load = async () => {
     const { app, config } = this;
-  console.log("wow")
+
     app.koa = new Koa();
     app.router = new KoaRouter();
 

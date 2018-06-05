@@ -73,7 +73,6 @@ var OwKoa = /** @class */ (function (_super) {
             var _a, app, config, pm2, probe, meter_1;
             return __generator(this, function (_b) {
                 _a = this, app = _a.app, config = _a.config;
-                console.log("wow");
                 app.koa = new Koa();
                 app.router = new KoaRouter();
                 app.koa.proxy = true;
