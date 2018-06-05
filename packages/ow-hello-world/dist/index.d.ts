@@ -1,4 +1,4 @@
-import { OwModule, IOwApplication } from '@ow-framework/core';
+import { OwModule, ApplicationInstance } from '@ow-framework/core';
 export interface IHelloWorldConfig {
     theString?: string;
 }
@@ -9,8 +9,7 @@ export interface IHelloWorldConfig {
  * @extends OwModule
  */
 declare class OwHelloWorldModule extends OwModule {
-    config: IHelloWorldConfig;
-    constructor(app: IOwApplication, opts: IHelloWorldConfig);
+    constructor(app: ApplicationInstance, opts?: IHelloWorldConfig);
     load: () => Promise<this>;
     ready: () => Promise<this>;
 }

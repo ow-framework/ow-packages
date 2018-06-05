@@ -9,14 +9,6 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
-var __assign = (this && this.__assign) || Object.assign || function(t) {
-    for (var s, i = 1, n = arguments.length; i < n; i++) {
-        s = arguments[i];
-        for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
-            t[p] = s[p];
-    }
-    return t;
-};
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     return new (P || (P = Promise))(function (resolve, reject) {
         function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
@@ -55,6 +47,9 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@ow-framework/core");
 ;
+var defaultOptions = {
+    theString: 'Hello world!'
+};
 /**
  * Example hello world module
  *
@@ -64,7 +59,8 @@ var core_1 = require("@ow-framework/core");
 var OwHelloWorldModule = /** @class */ (function (_super) {
     __extends(OwHelloWorldModule, _super);
     function OwHelloWorldModule(app, opts) {
-        var _this = _super.call(this, app) || this;
+        if (opts === void 0) { opts = defaultOptions; }
+        var _this = _super.call(this, app, opts) || this;
         _this.load = function () { return __awaiter(_this, void 0, void 0, function () {
             var theString;
             return __generator(this, function (_a) {
@@ -81,7 +77,6 @@ var OwHelloWorldModule = /** @class */ (function (_super) {
                 return [2 /*return*/, this];
             });
         }); };
-        _this.config = __assign({ theString: 'Hello World!' }, opts);
         return _this;
     }
     return OwHelloWorldModule;

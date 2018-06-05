@@ -1,7 +1,11 @@
-import { OwModule, IOwApplication } from '@ow-framework/core';
+import { OwModule, ApplicationInstance } from '@ow-framework/core';
 
 export interface IHelloWorldConfig {
   theString?: string
+};
+
+const defaultOptions: IHelloWorldConfig = {
+  theString: 'Hello world!'
 };
 
 /**
@@ -11,16 +15,9 @@ export interface IHelloWorldConfig {
  * @extends OwModule
  */
 class OwHelloWorldModule extends OwModule {
-  config: IHelloWorldConfig;
-
-  constructor(app: IOwApplication, opts: IHelloWorldConfig) {
-    super(app);
-
-    this.config = {
-      theString: 'Hello World!',
-      ...opts,
-    };
-
+  constructor(app: ApplicationInstance, opts: IHelloWorldConfig = defaultOptions) {
+    super(app, opts);
+    
     return this;
   }
 
