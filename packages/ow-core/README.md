@@ -1,4 +1,4 @@
-<img src="_media/ow-logo.png" width="100" />
+<img src="../../_media/ow-logo.png" width="100" />
 
 # @ow-framework/core
 
