@@ -1,4 +1,18 @@
-import * as Ow from './types';
+import { IOwApplication } from './Ow';
+
+export interface IOwModule {
+  new(app: IOwApplication): OwModule;
+  app: IOwApplication;
+  name: string;
+
+  dependencies?: string[];
+  requireEnv?: string[];
+
+  load?(): Promise<any>;
+  ready?(): Promise<any>;
+  unload?(): Promise<any>;
+  _ensureDependencies(): void;
+}
 
 const requireEnv = (env: string): boolean => typeof process.env[env] !== 'undefined';
 
@@ -7,15 +21,15 @@ const requireEnv = (env: string): boolean => typeof process.env[env] !== 'undefi
  *
  * @class OwModule
  */
-class OwModule implements Ow.IModule {
-  app: Ow.IApplication;
+export class OwModule implements OwModule {
+  app: IOwApplication;
   name: string;
 
   dependencies?: string[];
   requireEnv?: string[];
 
-  load: () => Promise<Ow.IModule>;
-  ready: () => Promise<Ow.IModule>;
+  load: () => Promise<this>;
+  ready: () => Promise<this>;
 
   /**
    * Each module receives the app instance it belongs to.
@@ -25,8 +39,8 @@ class OwModule implements Ow.IModule {
    * @param app application instance this module belongs to
    * @memberof OwModule
    */
-  constructor(app: Ow.IApplication) {
-    const self: Ow.IModule = this;
+  constructor(app: IOwApplication) {
+    const self = this;
 
     this.app = app;
     this.name = this.constructor.name;
@@ -60,5 +74,3 @@ class OwModule implements Ow.IModule {
     }
   }
 }
-
-export default OwModule;

@@ -44,5 +44,5 @@ var OwModule = /** @class */ (function () {
     }
     return OwModule;
 }());
-exports.default = OwModule;
+exports.OwModule = OwModule;
 //# sourceMappingURL=OwModule.js.map

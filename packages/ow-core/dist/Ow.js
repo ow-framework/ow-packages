@@ -8,9 +8,15 @@ var __assign = (this && this.__assign) || Object.assign || function(t) {
     return t;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var OwModule_1 = require("./OwModule");
 function noop() { }
-var noopLogger = { info: noop, log: noop, debug: noop, error: noop, warn: noop, };
+function getThenable() { return Promise.resolve(); }
+var noopLogger = {
+    info: noop,
+    log: noop,
+    debug: noop,
+    error: noop,
+    warn: noop,
+};
 function unhandledRejection(logger, error) {
     logger.error(error);
 }
@@ -37,7 +43,7 @@ var Application = /** @class */ (function () {
             this.logger = noopLogger;
         }
         this.unhandledRejectionHandler = unhandledRejection.bind(this, this.logger);
-        process.on("unhandledRejection", this.unhandledRejectionHandler);
+        process.on('unhandledRejection', this.unhandledRejectionHandler);
     }
     Application.prototype.on = function (eventName, fn) {
         var _a;
@@ -59,14 +65,15 @@ var Application = /** @class */ (function () {
     };
     Application.prototype.addModules = function (modules) {
         var _this = this;
-        var newModules = modules.reduce(function (acc, Module) {
-            var name = Module.name;
-            if (typeof Module === "function") {
-                var m = new OwModule_1.default(_this);
+        var self = this;
+        var newModules = modules.reduce(function (acc, passedModule) {
+            var name = passedModule.name;
+            if (typeof passedModule === 'function') {
+                var m = new passedModule(self);
                 acc[name] = m;
             }
             else {
-                acc[name] = Module;
+                acc[name] = passedModule;
             }
             // make sure module has a name
             if (typeof acc[name].name === 'undefined') {
@@ -84,18 +91,17 @@ var Application = /** @class */ (function () {
         if (modules === void 0) { modules = this.modules; }
         this.logger.debug("Triggering \"" + event + "\" on modules...");
         // nothing to load, exit
-        if (!Object.keys(modules).length)
+        var modulesToHandle = Object.keys(modules);
+        if (!modulesToHandle.length)
             return Promise.resolve();
         return new Promise(function (resolve, reject) {
-            var modulesToHandle = Object.keys(modules);
             if (modulesToHandle.length) {
                 var triggerModule_1 = function (module) {
                     _this.logger.debug(event + ": \"" + module.name + "\"");
-                    var result = (module[event] || function () { return Promise.resolve(); })();
-                    if (typeof result === 'undefined') {
-                        result = Promise.resolve();
-                    }
-                    return result.then(function () {
+                    // @ts-ignore
+                    var promise = (module[event] || getThenable)();
+                    return (promise || getThenable())
+                        .then(function () {
                         if (modulesToHandle.length) {
                             // @ts-ignore
                             triggerModule_1(modules[modulesToHandle.shift()]);
@@ -119,29 +125,29 @@ var Application = /** @class */ (function () {
         this.logger.info(this.started ? "Restarting ow application" : "Starting ow application.");
         var before = Promise.resolve();
         if (this.started) {
-            before = this._triggerModules("unload", this.modules);
+            before = this._triggerModules('unload', this.modules);
         }
         return before
-            .then(function () { return _this._triggerModules("ready", _this.modules); })
+            .then(function () { return _this._triggerModules('ready', _this.modules); })
             .then(function () {
             _this.logger.info("Started ow application.");
             _this.started = true;
         })
             .catch(function (e) {
             _this.logger.error(e);
-            _this.logger.error("An error occured during the application start sequence.\r\n" +
-                "This is probably not an issue with Ow but a module you loaded.\r\n" +
-                "There is likely more logging output above.");
+            _this.logger.error('An error occured during the application start sequence.\r\n' +
+                'This is probably not an issue with Ow but a module you loaded.\r\n' +
+                'There is likely more logging output above.');
         });
     };
     Application.prototype.stop = function () {
         process.removeListener('unhandledRejection', this.unhandledRejectionHandler);
         if (this.started) {
-            return this._triggerModules("unload", this.modules);
+            return this._triggerModules('unload', this.modules);
         }
         return Promise.resolve();
     };
     return Application;
 }());
-exports.default = Application;
+exports.Application = Application;
 //# sourceMappingURL=Ow.js.map
