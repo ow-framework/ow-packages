@@ -1,9 +1,7 @@
-import Ow from './Ow';
-export {
-  ApplicationInstance,
-  ModuleInstance,
-} from './types';
+import Application from './Application';
+import Module from './Module';
 
-export { default as OwModule } from './OwModule';
+export const Ow = Application;
+export const OwModule = Module;
 
 export default Ow;

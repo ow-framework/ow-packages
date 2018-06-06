@@ -2,8 +2,8 @@ import * as Koa from 'koa';
 import * as KoaRouter from 'koa-router';
 import { Server } from 'http';
 
-declare module '@ow-framework/core/dist/types' {
-  export interface ApplicationInstance {
+declare module '@ow-framework/core/types/Application' {
+  export interface IApplication {
     /** the url under which the server can be reached */
     uri: string; 
 

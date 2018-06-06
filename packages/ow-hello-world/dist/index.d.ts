@@ -10,7 +10,7 @@ export interface IHelloWorldConfig {
  */
 declare class OwHelloWorldModule extends OwModule {
     constructor(app: ApplicationInstance, opts?: IHelloWorldConfig);
-    load: () => Promise<this>;
-    ready: () => Promise<this>;
+    load: () => {};
+    ready: () => {};
 }
 export default OwHelloWorldModule;

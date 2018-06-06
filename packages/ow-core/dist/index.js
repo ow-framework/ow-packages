@@ -1,7 +1,8 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var Ow_1 = require("./Ow");
-var OwModule_1 = require("./OwModule");
-exports.OwModule = OwModule_1.default;
-exports.default = Ow_1.default;
+var Application_1 = require("./Application");
+var Module_1 = require("./Module");
+exports.Ow = Application_1.default;
+exports.OwModule = Module_1.default;
+exports.default = exports.Ow;
 //# sourceMappingURL=index.js.map

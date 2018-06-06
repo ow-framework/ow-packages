@@ -5,7 +5,7 @@ import * as koaStatic from 'koa-static';
 import * as getPort from 'get-port';
 
 import { Server } from 'http';
-import { OwModule } from '@ow-framework/core';
+import * as Ow from '@ow-framework/core';
 
 export interface IKoaConfig {
   port?: number;
@@ -21,7 +21,7 @@ export interface IKoaConfig {
  * @class OwKoa
  * @extends OwModule
  */
-export default class OwKoa extends OwModule {
+export default class OwKoa extends Ow.OwModule {
   config: IKoaConfig = {
     port: undefined,
     enableBodyParser: true,
