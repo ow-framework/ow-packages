@@ -1,6 +1,7 @@
 import * as sinon from 'sinon';
+import { IApplication } from './index';
 
-import Application, { IApplication } from './Application';
+import Application from './Application';
 import Module from './Module';
 
 describe('Application', () => {

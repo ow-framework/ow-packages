@@ -45,7 +45,6 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-/// <reference path="./ambient.d.ts"
 var Koa = require("koa");
 var KoaRouter = require("koa-router");
 var mount = require("koa-mount");

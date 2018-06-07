@@ -5,12 +5,23 @@ import * as KoaBody from 'koa-body';
 import * as Ow from '@ow-framework/core';
 import { Server } from 'http';
 import { IHelmetConfiguration } from 'helmet';
-import { IApplication } from '../../ow-core/types/Application';
 export interface IKoaConfig {
     port?: number;
     staticFolder?: string;
     enableBodyParser?: boolean | KoaBody.IKoaBodyOptions;
     enableHelmet?: boolean | IHelmetConfiguration;
+}
+declare module '@ow-framework/core' {
+    interface IApplication {
+        /** the url under which the server can be reached */
+        uri: string;
+        /** instance of the koa server **/
+        koa: Koa;
+        /** instance of koa router **/
+        router: KoaRouter;
+        /** http server instance **/
+        server: Server;
+    }
 }
 declare module 'koa' {
     interface Context {
@@ -31,7 +42,7 @@ export default class OwKoa extends Ow.OwModule {
     koa: Koa;
     router: KoaRouter;
     server?: Server;
-    constructor(app: IApplication, config?: IKoaConfig);
+    constructor(app: Ow.IApplication, config?: IKoaConfig);
     setPort: () => Promise<number>;
     start: () => Promise<this>;
     stop: () => Promise<this>;

@@ -1,7 +1,5 @@
 import * as Ow from '@ow-framework/core';
-import { IModuleConfig } from '../../ow-core/types/Module';
-import { IApplication } from '../../ow-core/types/Application';
-export interface IHelloWorldConfig extends IModuleConfig {
+export interface IHelloWorldConfig {
     theString?: string;
 }
 /**
@@ -12,7 +10,7 @@ export interface IHelloWorldConfig extends IModuleConfig {
  */
 declare class OwHelloWorldModule extends Ow.OwModule {
     config: IHelloWorldConfig;
-    constructor(app: IApplication, opts?: IHelloWorldConfig);
+    constructor(app: Ow.IApplication, opts?: IHelloWorldConfig);
     load: () => Promise<this>;
     ready: () => Promise<this>;
 }

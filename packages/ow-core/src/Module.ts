@@ -1,22 +1,4 @@
-import { IApplication } from './Application';
-
-export interface IModuleConfig {
-  [key: string]: any
-
-  name?: string;
-}
-
-export interface IModule {
-  name: string;
-  app: IApplication;
-  dependencies?: string[];
-  envDependencies?: string[];
-  config?: IModuleConfig
-}
-
-export interface IModuleConstructor {
-  new(app: IApplication, opts?: IModuleConfig): IModule
-}
+import { IApplication, IModule, IModuleOptions } from './index';
 
 export class Module implements IModule {
   name: string;
@@ -28,7 +10,7 @@ export class Module implements IModule {
   load?: () => Promise<this> | this;
   unload?: () => Promise<this> | this;
 
-  constructor(app: IApplication, config: IModuleConfig = {}) {
+  constructor(app: IApplication, config: IModuleOptions = {}) {
     this.name = config.name || this.constructor.name;
     this.app = app;
 

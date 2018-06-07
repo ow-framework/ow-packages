@@ -1,4 +1,3 @@
-/// <reference path="./ambient.d.ts"
 import * as Koa from 'koa';
 import * as KoaRouter from 'koa-router';
 import * as mount from 'koa-mount';
@@ -11,7 +10,6 @@ import * as Ow from '@ow-framework/core';
 import { Server } from 'http';
 
 import { IHelmetConfiguration } from 'helmet';
-import { IApplication } from '../../ow-core/types/Application';
 
 export interface IKoaConfig {
   port?: number;
@@ -19,6 +17,22 @@ export interface IKoaConfig {
   enableBodyParser?: boolean | KoaBody.IKoaBodyOptions;
   enableHelmet?: boolean | IHelmetConfiguration;
 };
+
+declare module '@ow-framework/core' {
+  interface IApplication {
+    /** the url under which the server can be reached */
+    uri: string;
+
+    /** instance of the koa server **/
+    koa: Koa;
+
+    /** instance of koa router **/
+    router: KoaRouter;
+
+    /** http server instance **/
+    server: Server;
+  }
+}
 
 declare module 'koa' {
   interface Context {
@@ -45,7 +59,7 @@ export default class OwKoa extends Ow.OwModule {
   router: KoaRouter;
   server?: Server;
 
-  constructor(app: IApplication, config: IKoaConfig = {}) {
+  constructor(app: Ow.IApplication, config: IKoaConfig = {}) {
     super(app);
 
     this.koa = app.koa = new Koa();
@@ -87,7 +101,7 @@ export default class OwKoa extends Ow.OwModule {
 
   start = async () => {
     const { app: { logger, koa, router } } = this;
-
+    
     router.get('/checkConnection', (ctx: Koa.Context) => {
       ctx.status = 200;
       ctx.body = 'ok';
