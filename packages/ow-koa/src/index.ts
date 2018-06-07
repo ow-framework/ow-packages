@@ -18,7 +18,6 @@ export interface IKoaConfig {
   staticFolder?: string;
   enableBodyParser?: boolean | KoaBody.IKoaBodyOptions;
   enableHelmet?: boolean | IHelmetConfiguration;
-  enablePMX?: boolean;
 };
 
 declare module 'koa' {
@@ -38,8 +37,7 @@ export default class OwKoa extends Ow.OwModule {
     port: undefined,
     enableBodyParser: true,
     enableHelmet: true,
-    staticFolder: './static/',
-    enablePMX: false,
+    staticFolder: './static/'
   };
   
   port?: number;
@@ -67,18 +65,6 @@ export default class OwKoa extends Ow.OwModule {
 
     if (config.staticFolder) {
       app.koa.use(mount('/static', koaStatic(config.staticFolder)));
-    }
-
-    if (config.enablePMX) {
-      const pm2 = require('../../helpers/pmx').default;
-      const probe = pm2.probe();
-
-      const meter = probe.meter({ name: 'req/sec', samples: 1 });
-
-      app.koa.use((ctx: Koa.Context, next: Function) => {
-        meter.mark();
-        return next();
-      });
     }
 
     return this;
