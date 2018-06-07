@@ -45,6 +45,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+var Ow = require("@ow-framework/core");
 ;
 var defaultOptions = {
     theString: 'Hello world!'
@@ -59,7 +60,7 @@ var OwHelloWorldModule = /** @class */ (function (_super) {
     __extends(OwHelloWorldModule, _super);
     function OwHelloWorldModule(app, opts) {
         if (opts === void 0) { opts = defaultOptions; }
-        var _this = _super.call(this, app) || this;
+        var _this = _super.call(this, app, opts) || this;
         _this.load = function () { return __awaiter(_this, void 0, void 0, function () {
             var theString;
             return __generator(this, function (_a) {
@@ -80,6 +81,6 @@ var OwHelloWorldModule = /** @class */ (function (_super) {
         return _this;
     }
     return OwHelloWorldModule;
-}(OwModule));
+}(Ow.OwModule));
 exports.default = OwHelloWorldModule;
 //# sourceMappingURL=index.js.map

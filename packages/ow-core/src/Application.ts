@@ -7,16 +7,15 @@ import {
   requireEnv,
 } from './lib';
 
-type Events = 'load' | 'ready' | 'unload' | string;
+type Events = 'load' | 'start' | 'stop' | string;
 
 type ModuleMap = {
   [key: string]: IModule;
 };
 
 type ListenerMap = {
-  load: Array<() => void>;
-  ready: Array<() => void>;
-  unload: Array<() => void>;
+  start: Array<() => void>;
+  stop: Array<() => void>;
   [event: string]: Array<() => void>;
 };
 
@@ -36,14 +35,6 @@ export interface IApplication {
   models: ModelMap;
 
   listeners: ListenerMap;
-
-  /**
-   * Adds modules to application instance and triggers their `load` function if available.
-   *
-   * @param modules[] Array of Module classes or Module instances to be added to the application
-   * @returns Promise<this>
-   */
-  addModules: (modules: Array<IModule | IModuleConstructor>) => Promise<this>;
 
   /**
    * Attach event listeners to ow application
@@ -67,7 +58,15 @@ export interface IApplication {
    * @param e Event name to be triggered
    */
   trigger: (e: Events) => void;
-  
+
+  /**
+   * Adds modules to application instance and triggers their `load` function if available.
+   *
+   * @param modules[] Array of Module classes or Module instances to be added to the application
+   * @returns Promise<this>
+   */
+  addModules: (modules: Array<IModule | IModuleConstructor>) => IApplication;
+
   /**
    * Triggers the given event or member function on all modules added to the app instance.
    *
@@ -75,6 +74,13 @@ export interface IApplication {
    * @param modules The modules on which the event should be triggered (default: this.modules)
    */
   triggerModules: (event: Events | string, modules?: ModuleMap) => Promise<IApplication>;
+
+  start(): PromiseLike<IApplication> | IApplication;
+  stop(): PromiseLike<IApplication> | IApplication;
+}
+
+export interface ApplicationConstructor {
+  new(opts?: ApplicationOptions): IApplication
 }
 
 class Application implements IApplication {
@@ -86,15 +92,14 @@ class Application implements IApplication {
   models: ModelMap = {};
 
   listeners: ListenerMap = {
-    load: [],
-    ready: [],
-    unload: [],
+    start: [],
+    stop: [],
   };
 
   private started = false;
   private unhandledRejectionHandler: () => void = noop;
 
-  constructor({ silent = false } = {}) {
+  constructor({ silent = false }: ApplicationOptions = {}) {
     if (typeof this.logger.debug === 'undefined') {
       this.logger.debug = this.logger.info;
     }
@@ -133,15 +138,14 @@ class Application implements IApplication {
     }
   }
 
-  ensureDependencies = (
-    module: IModule,
-    modules: ModuleMap,
-  ) => {
+  ensureDependencies = (module: IModule, modules: ModuleMap) => {
     if (module.dependencies) {
       module.dependencies.forEach(dep => {
         if (typeof modules[dep] === 'undefined') {
           throw new Error(
-            `${module.name} depends on ${dep}, but ${dep} was not loaded before ${
+            `${
+              module.name
+            } depends on ${dep}, but ${dep} was not loaded before ${
               module.name
             }. Check your boot sequence.`,
           );
@@ -165,7 +169,7 @@ class Application implements IApplication {
     }
   };
 
-  addModules(modules: Array<IModule | IModuleConstructor>): Promise<this> {
+  addModules = (modules: Array<IModule | IModuleConstructor>): IApplication => {
     const self = this;
     const newModules = modules.reduce(
       (acc: ModuleMap, passedModule: IModule | IModuleConstructor) => {
@@ -183,7 +187,7 @@ class Application implements IApplication {
           acc[name].name = name;
         }
 
-        this.ensureDependencies(acc[name], {...acc, ...this.modules});
+        this.ensureDependencies(acc[name], { ...acc, ...this.modules });
 
         return acc;
       },
@@ -192,16 +196,15 @@ class Application implements IApplication {
 
     this.modules = { ...this.modules, ...newModules };
 
-    return this.triggerModules('load', newModules)
-      .then(() => this);
+    return this;
   }
 
-  triggerModules(event: Events, modules = this.modules): Promise<this> {
+  triggerModules = (event: Events, modules = this.modules): Promise<IApplication> => {
     this.logger.debug(`Triggering "${event}" on modules...`);
 
     // nothing to load, exit
     const modulesToHandle: string[] = Object.keys(modules);
-    if (!modulesToHandle.length) return new Promise(resolve => resolve(this));
+    if (!modulesToHandle.length) return Promise.resolve(this);
 
     return new Promise((resolve, reject) => {
       if (modulesToHandle.length) {
@@ -237,9 +240,9 @@ class Application implements IApplication {
 
       resolve(this);
     });
-  }
+  };
 
-  start() {
+  start = (): Promise<this> => {
     this.logger.info(
       this.started ? `Restarting ow application` : `Starting ow application.`,
     );
@@ -249,10 +252,12 @@ class Application implements IApplication {
       : this.triggerModules('unload', this.modules);
 
     return before
-      .then(() => this.triggerModules('ready', this.modules))
+      .then(() => this.triggerModules('start', this.modules))
       .then(() => {
         this.logger.info(`Started ow application.`);
         this.started = true;
+
+        return this;
       })
       .catch(e => {
         this.logger.error(e);
@@ -262,21 +267,25 @@ class Application implements IApplication {
             'This is probably not an issue with Ow but a module you loaded.\r\n' +
             'There is likely more logging output above.',
         );
-      });
-  }
 
-  stop() {
+        return this;
+      });
+  };
+
+  stop = async (): Promise<IApplication> => {
     process.removeListener(
       'unhandledRejection',
       this.unhandledRejectionHandler,
     );
 
     if (this.started) {
-      return this.triggerModules('unload', this.modules);
+      return this.triggerModules('stop', this.modules);
     }
 
-    return Promise.resolve();
-  }
+    return Promise.resolve(this);
+  };
 }
 
-export default Application;
+const Ow: ApplicationConstructor = Application;
+
+export default Ow;

@@ -45,12 +45,15 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+/// <reference path="./ambient.d.ts"
 var Koa = require("koa");
 var KoaRouter = require("koa-router");
 var mount = require("koa-mount");
 var koaStatic = require("koa-static");
+var KoaBody = require("koa-body");
+var Helmet = require("koa-helmet");
 var getPort = require("get-port");
-var core_1 = require("@ow-framework/core");
+var Ow = require("@ow-framework/core");
 ;
 /**
  * ow module which adds koa to your application.
@@ -60,8 +63,9 @@ var core_1 = require("@ow-framework/core");
  */
 var OwKoa = /** @class */ (function (_super) {
     __extends(OwKoa, _super);
-    function OwKoa() {
-        var _this = _super !== null && _super.apply(this, arguments) || this;
+    function OwKoa(app, config) {
+        if (config === void 0) { config = {}; }
+        var _this = _super.call(this, app) || this;
         _this.config = {
             port: undefined,
             enableBodyParser: true,
@@ -69,37 +73,6 @@ var OwKoa = /** @class */ (function (_super) {
             staticFolder: './static/',
             enablePMX: false,
         };
-        _this.load = function () { return __awaiter(_this, void 0, void 0, function () {
-            var _a, app, config, pm2, probe, meter_1;
-            return __generator(this, function (_b) {
-                _a = this, app = _a.app, config = _a.config;
-                app.koa = new Koa();
-                app.router = new KoaRouter();
-                app.koa.proxy = true;
-                if (config.enableHelmet && process.env.NODE_ENV !== 'development') {
-                    app.koa.use(require('koa-helmet')());
-                }
-                if (config.enableBodyParser) {
-                    app.koa.use(require('koa-body')());
-                }
-                if (config.staticFolder) {
-                    app.koa.use(mount('/static', koaStatic(config.staticFolder)));
-                }
-                if (config.enablePMX) {
-                    pm2 = require('../../helpers/pmx').default;
-                    probe = pm2.probe();
-                    meter_1 = probe.meter({
-                        name: 'req/sec',
-                        samples: 1,
-                    });
-                    app.koa.use(function (ctx, next) {
-                        meter_1.mark();
-                        return next();
-                    });
-                }
-                return [2 /*return*/, this];
-            });
-        }); };
         _this.setPort = function () { return __awaiter(_this, void 0, void 0, function () {
             var config, _a, _b, _c;
             return __generator(this, function (_d) {
@@ -124,7 +97,7 @@ var OwKoa = /** @class */ (function (_super) {
                 }
             });
         }); };
-        _this.ready = function () { return __awaiter(_this, void 0, void 0, function () {
+        _this.start = function () { return __awaiter(_this, void 0, void 0, function () {
             var _a, logger, koa, router, port, _b;
             var _this = this;
             return __generator(this, function (_c) {
@@ -194,9 +167,32 @@ var OwKoa = /** @class */ (function (_super) {
                 }
             });
         }); };
+        _this.koa = app.koa = new Koa();
+        _this.router = app.router = new KoaRouter();
+        app.koa.proxy = true;
+        if (config.enableHelmet) {
+            var helmetOptions = typeof config.enableHelmet === 'object' ? config.enableHelmet : undefined;
+            app.koa.use(Helmet(helmetOptions));
+        }
+        if (config.enableBodyParser) {
+            var bodyOptions = typeof config.enableBodyParser === 'object' ? config.enableBodyParser : undefined;
+            app.koa.use(KoaBody(bodyOptions));
+        }
+        if (config.staticFolder) {
+            app.koa.use(mount('/static', koaStatic(config.staticFolder)));
+        }
+        if (config.enablePMX) {
+            var pm2 = require('../../helpers/pmx').default;
+            var probe = pm2.probe();
+            var meter_1 = probe.meter({ name: 'req/sec', samples: 1 });
+            app.koa.use(function (ctx, next) {
+                meter_1.mark();
+                return next();
+            });
+        }
         return _this;
     }
     return OwKoa;
-}(core_1.OwModule));
+}(Ow.OwModule));
 exports.default = OwKoa;
 //# sourceMappingURL=index.js.map

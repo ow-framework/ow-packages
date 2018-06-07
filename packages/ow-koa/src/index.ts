@@ -1,19 +1,31 @@
+/// <reference path="./ambient.d.ts"
 import * as Koa from 'koa';
 import * as KoaRouter from 'koa-router';
 import * as mount from 'koa-mount';
 import * as koaStatic from 'koa-static';
+import * as KoaBody from 'koa-body';
+import * as Helmet from 'koa-helmet';
 import * as getPort from 'get-port';
+import * as Ow from '@ow-framework/core';
 
 import { Server } from 'http';
-import * as Ow from '@ow-framework/core';
+
+import { IHelmetConfiguration } from 'helmet';
+import { IApplication } from '../../ow-core/types/Application';
 
 export interface IKoaConfig {
   port?: number;
   staticFolder?: string;
-  enableBodyParser?: boolean;
-  enableHelmet?: boolean;
+  enableBodyParser?: boolean | KoaBody.IKoaBodyOptions;
+  enableHelmet?: boolean | IHelmetConfiguration;
   enablePMX?: boolean;
 };
+
+declare module 'koa' {
+  interface Context {
+    $cache: { [key: string]: any }
+  }
+}
 
 /**
  * ow module which adds koa to your application.
@@ -31,23 +43,26 @@ export default class OwKoa extends Ow.OwModule {
   };
   
   port?: number;
-  koa?: Koa;
+  koa: Koa;
+  router: KoaRouter;
   server?: Server;
 
-  load = async () => {
-    const { app, config } = this;
+  constructor(app: IApplication, config: IKoaConfig = {}) {
+    super(app);
 
-    app.koa = new Koa();
-    app.router = new KoaRouter();
+    this.koa = app.koa = new Koa();
+    this.router = app.router = new KoaRouter();
 
     app.koa.proxy = true;
 
-    if (config.enableHelmet && process.env.NODE_ENV !== 'development') {
-      app.koa.use(require('koa-helmet')());
+    if (config.enableHelmet) {
+      const helmetOptions = typeof config.enableHelmet === 'object' ? config.enableHelmet : undefined;
+      app.koa.use(Helmet(helmetOptions));
     }
 
     if (config.enableBodyParser) {
-      app.koa.use(require('koa-body')());
+      const bodyOptions = typeof config.enableBodyParser === 'object' ? config.enableBodyParser : undefined;
+      app.koa.use(KoaBody(bodyOptions));
     }
 
     if (config.staticFolder) {
@@ -58,10 +73,7 @@ export default class OwKoa extends Ow.OwModule {
       const pm2 = require('../../helpers/pmx').default;
       const probe = pm2.probe();
 
-      const meter = probe.meter({
-        name: 'req/sec',
-        samples: 1,
-      });
+      const meter = probe.meter({ name: 'req/sec', samples: 1 });
 
       app.koa.use((ctx: Koa.Context, next: Function) => {
         meter.mark();
@@ -87,7 +99,7 @@ export default class OwKoa extends Ow.OwModule {
     return this.port;
   }
 
-  ready = async () => {
+  start = async () => {
     const { app: { logger, koa, router } } = this;
 
     router.get('/checkConnection', (ctx: Koa.Context) => {

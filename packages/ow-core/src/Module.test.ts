@@ -18,6 +18,13 @@ describe('Module', () => {
     expect(instance.name).toBe('Module');
   });
 
+  it("sets its name member to passed config.name if available", () => {
+    const app = new App();
+    const instance = new Module(app, { name: "Different Name" });
+
+    expect(instance.name).toBe('Different Name');
+  });
+
   it('can be used as base class for custom modules', () => {
     const app = new App();
 
@@ -37,27 +44,28 @@ describe('Module', () => {
     expect(app.modules.Module).toBeTruthy();
   });
 
-  it(`can overwrite ready and load functions
+  it(`can overwrite start function
       which will be triggered during
       ow application lifecycle
       `, async () => {
     const app = new App({ silent: true });
 
-    const load = sinon.fake.returns(new Promise(resolve => resolve(app)));
-    const ready = sinon.fake.returns(new Promise(resolve => resolve(app)));
+    const start = sinon.fake.returns(new Promise(resolve => resolve(app)));
 
     class CustomModule extends Module {
-      load = load;
-      ready = ready;
+      start = start;
     }
 
     const instance = new CustomModule(app);
 
-    await app.addModules([instance]);
+    app.addModules([instance]);
 
     expect(instance.name).toBe('CustomModule');
-    expect(load.calledOnce).toBeTruthy();
-    expect(ready.notCalled).toBeTruthy();
+    expect(start.calledOnce).toBeFalsy();
+
+    await app.start();
+
+    expect(start.calledOnce).toBeTruthy();
   });
 
   it(`throws if dependency module does not exist`, async () => {
@@ -83,7 +91,7 @@ describe('Module', () => {
     }
 
     try {
-      await app.addModules([CustomModule, WithDepModule]);
+      app.addModules([CustomModule, WithDepModule]);
       expect(true).toBeTruthy();
     } catch (err) {
       expect(err).toBeFalsy();
@@ -99,7 +107,7 @@ describe('Module', () => {
     }
 
     try {
-      await app.addModules([WithDepModule, CustomModule]);
+      app.addModules([CustomModule, WithDepModule]);
       expect(true).toBeFalsy();
     } catch (err) {
       expect(err).toBeTruthy();

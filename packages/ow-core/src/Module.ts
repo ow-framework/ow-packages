@@ -2,6 +2,8 @@ import { IApplication } from './Application';
 
 export interface IModuleConfig {
   [key: string]: any
+
+  name?: string;
 }
 
 export interface IModule {
@@ -13,7 +15,7 @@ export interface IModule {
 }
 
 export interface IModuleConstructor {
-  new(app: IApplication): IModule
+  new(app: IApplication, opts?: IModuleConfig): IModule
 }
 
 export class Module implements IModule {
@@ -26,8 +28,8 @@ export class Module implements IModule {
   load?: () => Promise<this> | this;
   unload?: () => Promise<this> | this;
 
-  constructor(app: IApplication) {
-    this.name = this.constructor.name;
+  constructor(app: IApplication, config: IModuleConfig = {}) {
+    this.name = config.name || this.constructor.name;
     this.app = app;
 
     return this;

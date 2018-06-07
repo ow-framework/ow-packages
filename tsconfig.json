@@ -13,10 +13,5 @@
       "es6",
       "esnext.asynciterable"
     ]
-  },
-  "exclude": [
-    "**/dist",
-    "**/src/**/*.test.ts",
-    "**/types"
-  ]
+  }
 }
