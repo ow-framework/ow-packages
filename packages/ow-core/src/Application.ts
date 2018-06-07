@@ -25,9 +25,17 @@ export interface ApplicationOptions {
   silent?: boolean;
 }
 
+export interface Logger {
+  log: Function,
+  info: Function,
+  debug: Function,
+  warn: Function,
+  verbose?: Function
+}
+
 export interface IApplication {
   logLevel: string;
-  logger: Console;
+  logger: Logger;
 
   /** Mapping of ModuleName:ModuleInstance of all modules added with app.addModules() */
   modules: ModuleMap;
