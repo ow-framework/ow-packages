@@ -70,8 +70,7 @@ var OwKoa = /** @class */ (function (_super) {
             port: undefined,
             enableBodyParser: true,
             enableHelmet: true,
-            staticFolder: './static/',
-            enablePMX: false,
+            staticFolder: './static/'
         };
         _this.setPort = function () { return __awaiter(_this, void 0, void 0, function () {
             var config, _a, _b, _c;
@@ -148,12 +147,12 @@ var OwKoa = /** @class */ (function (_super) {
                         this.server = this.app.server;
                         this.app.uri = "http://localhost:" + port;
                         logger.info("Server listening on http://localhost:" + port);
-                        process.on('exit', this.unload);
+                        process.on('exit', this.stop);
                         return [2 /*return*/, this];
                 }
             });
         }); };
-        _this.unload = function () { return __awaiter(_this, void 0, void 0, function () {
+        _this.stop = function () { return __awaiter(_this, void 0, void 0, function () {
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -180,15 +179,6 @@ var OwKoa = /** @class */ (function (_super) {
         }
         if (config.staticFolder) {
             app.koa.use(mount('/static', koaStatic(config.staticFolder)));
-        }
-        if (config.enablePMX) {
-            var pm2 = require('../../helpers/pmx').default;
-            var probe = pm2.probe();
-            var meter_1 = probe.meter({ name: 'req/sec', samples: 1 });
-            app.koa.use(function (ctx, next) {
-                meter_1.mark();
-                return next();
-            });
         }
         return _this;
     }

@@ -120,13 +120,13 @@ export default class OwKoa extends Ow.OwModule {
 
     logger.info(`Server listening on http://localhost:${port}`);
 
-    process.on('exit', this.unload);
+    process.on('exit', this.stop);
 
     return this;
   }
 
 
-  unload = async () => {
+  stop = async () => {
     this.app.logger.info(`Closing server listening on http://localhost:${this.port}`);
 
     if (this.server) {

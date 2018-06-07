@@ -11,7 +11,6 @@ export interface IKoaConfig {
     staticFolder?: string;
     enableBodyParser?: boolean | KoaBody.IKoaBodyOptions;
     enableHelmet?: boolean | IHelmetConfiguration;
-    enablePMX?: boolean;
 }
 declare module 'koa' {
     interface Context {
@@ -35,5 +34,5 @@ export default class OwKoa extends Ow.OwModule {
     constructor(app: IApplication, config?: IKoaConfig);
     setPort: () => Promise<number>;
     start: () => Promise<this>;
-    unload: () => Promise<this>;
+    stop: () => Promise<this>;
 }
