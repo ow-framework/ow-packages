@@ -1,6 +1,6 @@
 {
   "name": "@ow-framework/koa",
-  "version": "2.0.0-3",
+  "version": "2.0.0-4",
   "description": "",
   "main": "dist/index",
   "scripts": {
@@ -20,7 +20,7 @@
     "typescript": "^2.9.1"
   },
   "dependencies": {
-    "@ow-framework/core": "^2.0.0-3",
+    "@ow-framework/core": "^2.0.0-4",
     "@types/get-port": "^3.2.0",
     "@types/jest": "^23.0.0",
     "@types/koa-helmet": "^3.1.2",
