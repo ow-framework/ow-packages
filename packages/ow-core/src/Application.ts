@@ -186,9 +186,9 @@ class Application implements IApplication {
       this.started ? `Restarting ow application` : `Starting ow application.`,
     );
 
-    const before: Promise<IApplication | this> = this.started
+    const before: Promise<IApplication | this> = !this.started
       ? Promise.resolve(this)
-      : this.triggerModules('unload', this.modules);
+      : this.triggerModules('stop', this.modules);
 
     return before
       .then(() => this.triggerModules('start', this.modules))

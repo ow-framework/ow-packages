@@ -80,4 +80,62 @@ describe('Application', () => {
 
     expect(app.modules.TestModule).toBeTruthy();
   });
+
+  it('Does not trigger stop function on modules on first start', async () => {
+    const app = new Application({ silent: true });
+
+    const stopSpy = sinon.fake.returns(new Promise(resolve =>
+      resolve(app),
+    ));
+
+    class TestModule extends Module {
+      stop = stopSpy;
+    }
+
+    const Test = new TestModule(app);
+
+    expect(stopSpy.calledOnce).toBeFalsy();
+
+    await app.addModules([Test]);
+
+    expect(stopSpy.calledOnce).toBeFalsy();
+
+    await app.start();
+    
+    expect(stopSpy.calledOnce).toBeFalsy();
+  });
+
+  it('Triggers "stop" function on all modules when restarting', async () => {
+    const app = new Application({ silent: true });
+
+    const stopSpy = sinon.fake.returns(new Promise(resolve =>
+        resolve(app),
+    ));
+
+    const startSpy = sinon.fake.returns(new Promise(resolve =>
+      resolve(app),
+    ));
+
+    class TestModule extends Module {
+      start = startSpy;
+      stop = stopSpy;
+    }
+
+    const Test = new TestModule(app);
+
+    expect(stopSpy.calledOnce).toBeFalsy();
+
+    await app.addModules([Test]);
+
+    expect(stopSpy.calledOnce).toBeFalsy();
+
+    await app.start();
+
+    expect(stopSpy.calledOnce).toBeFalsy();
+
+    await app.start();
+
+    expect(stopSpy.calledOnce).toBeTruthy();
+    expect(startSpy.calledTwice).toBeTruthy();
+  });
 })
