@@ -3,7 +3,7 @@
   "version": "2.0.0-5",
   "description": "",
   "main": "dist/index",
-  "types": "./types",
+  "types": "./dist",
   "scripts": {
     "build": "tsc",
     "prepublishOnly": "npm run build",
