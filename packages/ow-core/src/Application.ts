@@ -162,7 +162,10 @@ class Application implements IApplication {
                 }
               },
             )
-            .catch(reject);
+            .catch(err => {
+              console.error(err);
+              return reject(err);
+            });
         };
 
         // @ts-ignore

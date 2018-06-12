@@ -4,12 +4,13 @@ import * as mount from 'koa-mount';
 import * as koaStatic from 'koa-static';
 import * as KoaBody from 'koa-body';
 import * as Helmet from 'koa-helmet';
-import * as getPort from 'get-port';
 import * as Ow from '@ow-framework/core';
 
 import { Server } from 'http';
 
 import { IHelmetConfiguration } from 'helmet';
+
+const getPort = require('get-port');
 
 export interface IKoaConfig {
   port?: number;
@@ -87,10 +88,14 @@ export default class OwKoa extends Ow.OwModule {
   setPort = async () => {
     const { config } = this;
 
-    this.port = parseInt(
-      (config.port || process.env.PORT || await getPort()).toString(),
-      10
-    );
+    if (config.port || process.env.PORT) {
+      this.port = parseInt(
+        config.port ? config.port.toString() : process.env.PORT || '',
+        10
+      );
+    } else {
+      this.port = await getPort();
+    }
 
     if (process.env.NODE_ENV === 'test' && process.env.TEST_PORT) {
       this.port = parseInt(process.env.TEST_PORT, 10);

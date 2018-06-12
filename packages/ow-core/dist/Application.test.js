@@ -128,5 +128,78 @@ describe('Application', function () {
             }
         });
     }); });
+    it('Does not trigger stop function on modules on first start', function () { return __awaiter(_this, void 0, void 0, function () {
+        var app, stopSpy, TestModule, Test;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0:
+                    app = new Application_1.default({ silent: true });
+                    stopSpy = sinon.fake.returns(new Promise(function (resolve) {
+                        return resolve(app);
+                    }));
+                    TestModule = /** @class */ (function (_super) {
+                        __extends(TestModule, _super);
+                        function TestModule() {
+                            var _this = _super !== null && _super.apply(this, arguments) || this;
+                            _this.stop = stopSpy;
+                            return _this;
+                        }
+                        return TestModule;
+                    }(Module_1.default));
+                    Test = new TestModule(app);
+                    expect(stopSpy.calledOnce).toBeFalsy();
+                    return [4 /*yield*/, app.addModules([Test])];
+                case 1:
+                    _a.sent();
+                    expect(stopSpy.calledOnce).toBeFalsy();
+                    return [4 /*yield*/, app.start()];
+                case 2:
+                    _a.sent();
+                    expect(stopSpy.calledOnce).toBeFalsy();
+                    return [2 /*return*/];
+            }
+        });
+    }); });
+    it('Triggers "stop" function on all modules when restarting', function () { return __awaiter(_this, void 0, void 0, function () {
+        var app, stopSpy, startSpy, TestModule, Test;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0:
+                    app = new Application_1.default({ silent: true });
+                    stopSpy = sinon.fake.returns(new Promise(function (resolve) {
+                        return resolve(app);
+                    }));
+                    startSpy = sinon.fake.returns(new Promise(function (resolve) {
+                        return resolve(app);
+                    }));
+                    TestModule = /** @class */ (function (_super) {
+                        __extends(TestModule, _super);
+                        function TestModule() {
+                            var _this = _super !== null && _super.apply(this, arguments) || this;
+                            _this.start = startSpy;
+                            _this.stop = stopSpy;
+                            return _this;
+                        }
+                        return TestModule;
+                    }(Module_1.default));
+                    Test = new TestModule(app);
+                    expect(stopSpy.calledOnce).toBeFalsy();
+                    return [4 /*yield*/, app.addModules([Test])];
+                case 1:
+                    _a.sent();
+                    expect(stopSpy.calledOnce).toBeFalsy();
+                    return [4 /*yield*/, app.start()];
+                case 2:
+                    _a.sent();
+                    expect(stopSpy.calledOnce).toBeFalsy();
+                    return [4 /*yield*/, app.start()];
+                case 3:
+                    _a.sent();
+                    expect(stopSpy.calledOnce).toBeTruthy();
+                    expect(startSpy.calledTwice).toBeTruthy();
+                    return [2 /*return*/];
+            }
+        });
+    }); });
 });
 //# sourceMappingURL=Application.test.js.map

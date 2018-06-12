@@ -5,6 +5,7 @@
     "module": "commonjs",
     "target": "es5",
     "moduleResolution": "node",
+    "allowSyntheticDefaultImports": true,
     "forceConsistentCasingInFileNames": true,
     "noImplicitReturns": true,
     "strict": true,

@@ -119,7 +119,10 @@ var Application = /** @class */ (function () {
                                 triggerModule_1(modules[modulesToHandle.shift()]);
                             }
                         })
-                            .catch(reject);
+                            .catch(function (err) {
+                            console.error(err);
+                            return reject(err);
+                        });
                     };
                     // @ts-ignore
                     triggerModule_1(modules[modulesToHandle.shift()])
@@ -134,9 +137,9 @@ var Application = /** @class */ (function () {
         };
         this.start = function () {
             _this.logger.info(_this.started ? "Restarting ow application" : "Starting ow application.");
-            var before = _this.started
+            var before = !_this.started
                 ? Promise.resolve(_this)
-                : _this.triggerModules('unload', _this.modules);
+                : _this.triggerModules('stop', _this.modules);
             return before
                 .then(function () { return _this.triggerModules('start', _this.modules); })
                 .then(function () {
