@@ -147,16 +147,18 @@ describe('Application', () => {
     class TestModule extends Module {
       start = async () => {
         return new Promise((resolve) => {
-          setTimeout(resolve, 3000);
+          setTimeout(resolve, 1500);
         })
         .then(moduleStartResolveSpy);
       }
     }
 
-    await app.addModules([TestModule]);
+    class TestModule2 extends TestModule {}
+
+    await app.addModules([TestModule, TestModule2]);
     await app.start();
     
-    expect(moduleStartResolveSpy.calledOnce).toBeTruthy();
+    expect(moduleStartResolveSpy.callCount).toEqual(2);
   });
 
 })

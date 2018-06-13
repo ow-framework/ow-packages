@@ -215,7 +215,7 @@ describe('Application', function () {
                             _this.start = function () { return __awaiter(_this, void 0, void 0, function () {
                                 return __generator(this, function (_a) {
                                     return [2 /*return*/, new Promise(function (resolve) {
-                                            setTimeout(resolve, 5000);
+                                            setTimeout(resolve, 3000);
                                         })
                                             .then(moduleStartResolveSpy)];
                                 });

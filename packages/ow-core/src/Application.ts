@@ -146,41 +146,37 @@ class Application implements IApplication {
     if (!modulesToHandle.length) return Promise.resolve(this);
 
     return new Promise((resolve, reject) => {
-      if (modulesToHandle.length) {
-        const triggerModule = (module: Module): Promise<void> => {
-          this.logger.debug(`${event}: "${module.name}"`);
-
-          // @ts-ignore
-          const promise: Promise<any> = (module[event] || getThenable)();
-          
-          return (promise || getThenable())
-            .then(
-              (): void => {
-                if (modulesToHandle.length) {
-                  // @ts-ignore
-                  triggerModule(modules[modulesToHandle.shift()]);
-                }
-              },
-            )
-            .catch(err => {
-              console.error(`An error occurred when calling ${event} on ${module.name}`, err);
-              return reject(err);
-            });
-        };
+      const triggerModule = (module: Module): Promise<void> => {
+        this.logger.debug(`${event}: "${module.name}"`);
 
         // @ts-ignore
-        triggerModule(modules[modulesToHandle.shift()])
-          .then(() => resolve(this))
-          .catch((err: Error) => {
-            this.logger.error(
-              `Couldn't trigger ${event} on modules.\r\n\r\n`,
-              err,
-            );
-            reject();
+        const promise: Promise<any> = (module[event] || getThenable)();
+        
+        return (promise || getThenable())
+          .then(
+            (): void => {
+              if (modulesToHandle.length) {
+                // @ts-ignore
+                return triggerModule(modules[modulesToHandle.shift()]);
+              }
+            },
+          )
+          .catch(err => {
+            console.error(`An error occurred when calling ${event} on ${module.name}`, err);
+            return reject(err);
           });
-      } else {
-        resolve(this);
-      }
+      };
+
+      // @ts-ignore
+      triggerModule(modules[modulesToHandle.shift()])
+        .then(() => resolve(this))
+        .catch((err: Error) => {
+          this.logger.error(
+            `Couldn't trigger ${event} on modules.\r\n\r\n`,
+            err,
+          );
+          reject();
+        });
     });
   };
 

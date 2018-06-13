@@ -107,32 +107,29 @@ var Application = /** @class */ (function () {
             if (!modulesToHandle.length)
                 return Promise.resolve(_this);
             return new Promise(function (resolve, reject) {
-                if (modulesToHandle.length) {
-                    var triggerModule_1 = function (module) {
-                        _this.logger.debug(event + ": \"" + module.name + "\"");
-                        // @ts-ignore
-                        var promise = (module[event] || lib_1.getThenable)();
-                        return (promise || lib_1.getThenable())
-                            .then(function () {
-                            if (modulesToHandle.length) {
-                                // @ts-ignore
-                                triggerModule_1(modules[modulesToHandle.shift()]);
-                            }
-                        })
-                            .catch(function (err) {
-                            console.error("An error occurred when calling " + event + "\u00A0on " + module.name, err);
-                            return reject(err);
-                        });
-                    };
+                var triggerModule = function (module) {
+                    _this.logger.debug(event + ": \"" + module.name + "\"");
                     // @ts-ignore
-                    triggerModule_1(modules[modulesToHandle.shift()])
-                        .then(function () { return resolve(_this); })
+                    var promise = (module[event] || lib_1.getThenable)();
+                    return (promise || lib_1.getThenable())
+                        .then(function () {
+                        if (modulesToHandle.length) {
+                            // @ts-ignore
+                            triggerModule(modules[modulesToHandle.shift()]);
+                        }
+                    })
                         .catch(function (err) {
-                        _this.logger.error("Couldn't trigger " + event + " on modules.\r\n\r\n", err);
-                        reject();
+                        console.error("An error occurred when calling " + event + "\u00A0on " + module.name, err);
+                        return reject(err);
                     });
-                }
-                resolve(_this);
+                };
+                // @ts-ignore
+                triggerModule(modules[modulesToHandle.shift()])
+                    .then(function () { return resolve(_this); })
+                    .catch(function (err) {
+                    _this.logger.error("Couldn't trigger " + event + " on modules.\r\n\r\n", err);
+                    reject();
+                });
             });
         };
         this.start = function () {
