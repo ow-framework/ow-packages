@@ -201,5 +201,39 @@ describe('Application', function () {
             }
         });
     }); });
+    test('the promise returned from start only resolves after all modules .start promises have resolved', function () { return __awaiter(_this, void 0, void 0, function () {
+        var app, moduleStartResolveSpy, TestModule;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0:
+                    app = new Application_1.default({ silent: true });
+                    moduleStartResolveSpy = sinon.fake();
+                    TestModule = /** @class */ (function (_super) {
+                        __extends(TestModule, _super);
+                        function TestModule() {
+                            var _this = _super !== null && _super.apply(this, arguments) || this;
+                            _this.start = function () { return __awaiter(_this, void 0, void 0, function () {
+                                return __generator(this, function (_a) {
+                                    return [2 /*return*/, new Promise(function (resolve) {
+                                            setTimeout(resolve, 5000);
+                                        })
+                                            .then(moduleStartResolveSpy)];
+                                });
+                            }); };
+                            return _this;
+                        }
+                        return TestModule;
+                    }(Module_1.default));
+                    return [4 /*yield*/, app.addModules([TestModule])];
+                case 1:
+                    _a.sent();
+                    return [4 /*yield*/, app.start()];
+                case 2:
+                    _a.sent();
+                    expect(moduleStartResolveSpy.calledOnce).toBeTruthy();
+                    return [2 /*return*/];
+            }
+        });
+    }); });
 });
 //# sourceMappingURL=Application.test.js.map

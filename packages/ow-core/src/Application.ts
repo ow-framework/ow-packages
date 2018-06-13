@@ -178,9 +178,9 @@ class Application implements IApplication {
             );
             reject();
           });
+      } else {
+        resolve(this);
       }
-
-      resolve(this);
     });
   };
 

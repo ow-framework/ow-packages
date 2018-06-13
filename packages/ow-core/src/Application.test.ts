@@ -138,4 +138,25 @@ describe('Application', () => {
     expect(stopSpy.calledOnce).toBeTruthy();
     expect(startSpy.calledTwice).toBeTruthy();
   });
+
+  test('the promise returned from start only resolves after all modules .start promises have resolved', async () => {
+    const app = new Application({ silent: true });
+
+    const moduleStartResolveSpy = sinon.fake();
+
+    class TestModule extends Module {
+      start = async () => {
+        return new Promise((resolve) => {
+          setTimeout(resolve, 3000);
+        })
+        .then(moduleStartResolveSpy);
+      }
+    }
+
+    await app.addModules([TestModule]);
+    await app.start();
+    
+    expect(moduleStartResolveSpy.calledOnce).toBeTruthy();
+  });
+
 })
