@@ -19,7 +19,7 @@ export type ListenerMap = {
   [event: string]: Array<() => void>;
 };
 
-export type ModelMap = { [key: string]: object };
+export interface ModelMap { [key: string]: any };
 
 export interface IApplicationOptions {
   silent?: boolean;

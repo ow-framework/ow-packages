@@ -120,7 +120,7 @@ var Application = /** @class */ (function () {
                             }
                         })
                             .catch(function (err) {
-                            console.error(err);
+                            console.error("An error occurred when calling " + event + "\u00A0on " + module.name, err);
                             return reject(err);
                         });
                     };

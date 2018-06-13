@@ -152,7 +152,7 @@ class Application implements IApplication {
 
           // @ts-ignore
           const promise: Promise<any> = (module[event] || getThenable)();
-
+          
           return (promise || getThenable())
             .then(
               (): void => {
@@ -163,7 +163,7 @@ class Application implements IApplication {
               },
             )
             .catch(err => {
-              console.error(err);
+              console.error(`An error occurred when calling ${event} on ${module.name}`, err);
               return reject(err);
             });
         };
