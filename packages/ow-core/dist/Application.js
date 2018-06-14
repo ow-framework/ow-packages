@@ -115,7 +115,7 @@ var Application = /** @class */ (function () {
                         .then(function () {
                         if (modulesToHandle.length) {
                             // @ts-ignore
-                            triggerModule(modules[modulesToHandle.shift()]);
+                            return triggerModule(modules[modulesToHandle.shift()]);
                         }
                     })
                         .catch(function (err) {

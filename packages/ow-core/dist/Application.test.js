@@ -202,7 +202,7 @@ describe('Application', function () {
         });
     }); });
     test('the promise returned from start only resolves after all modules .start promises have resolved', function () { return __awaiter(_this, void 0, void 0, function () {
-        var app, moduleStartResolveSpy, TestModule;
+        var app, moduleStartResolveSpy, TestModule, TestModule2;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
@@ -215,7 +215,7 @@ describe('Application', function () {
                             _this.start = function () { return __awaiter(_this, void 0, void 0, function () {
                                 return __generator(this, function (_a) {
                                     return [2 /*return*/, new Promise(function (resolve) {
-                                            setTimeout(resolve, 3000);
+                                            setTimeout(resolve, 1500);
                                         })
                                             .then(moduleStartResolveSpy)];
                                 });
@@ -224,13 +224,20 @@ describe('Application', function () {
                         }
                         return TestModule;
                     }(Module_1.default));
-                    return [4 /*yield*/, app.addModules([TestModule])];
+                    TestModule2 = /** @class */ (function (_super) {
+                        __extends(TestModule2, _super);
+                        function TestModule2() {
+                            return _super !== null && _super.apply(this, arguments) || this;
+                        }
+                        return TestModule2;
+                    }(TestModule));
+                    return [4 /*yield*/, app.addModules([TestModule, TestModule2])];
                 case 1:
                     _a.sent();
                     return [4 /*yield*/, app.start()];
                 case 2:
                     _a.sent();
-                    expect(moduleStartResolveSpy.calledOnce).toBeTruthy();
+                    expect(moduleStartResolveSpy.callCount).toEqual(2);
                     return [2 /*return*/];
             }
         });

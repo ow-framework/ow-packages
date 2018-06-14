@@ -10,6 +10,14 @@ The way you write modules for **ow** is also straightforward and kept as simple 
 
 If you adhere to **ow**s patterns, you'll end up with applications that are modular, stable and easy to test as well as custom modules which can easily be extracted and reused in different applications.
 
+# Features
+
+- easy to start with – just 3 lines and you have an **ow** app running!
+- small api surface (`.addModules(Module[])`, `.start()`, `.stop()`)
+- easy module and env dependency declaration for modules (`envDependencies: string[]`, `dependencies: string[]`);
+- ensures sequential module initialization and startup
+- extend shared `app` instance with custom functionality
+
 # Quick Start
 
 First, install  **@ow-framework/core** in your application.
