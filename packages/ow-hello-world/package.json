@@ -1,6 +1,6 @@
 {
   "name": "@ow-framework/hello-world",
-  "version": "2.0.6",
+  "version": "2.0.7",
   "description": "",
   "main": "./dist/index.js",
   "types": "./dist",
@@ -25,6 +25,6 @@
     "access": "public"
   },
   "dependencies": {
-    "@ow-framework/core": "^2.0.6"
+    "@ow-framework/core": "^2.0.7"
   }
 }
