@@ -9,15 +9,15 @@ export default Ow;
 
 export type Events = 'load' | 'start' | 'stop' | string;
 
-export type ModuleMap = {
-  [key: string]: IModule;
-};
-
 export type ListenerMap = {
   start: Array<() => void>;
   stop: Array<() => void>;
   [event: string]: Array<() => void>;
 };
+
+export interface ModuleMap {
+  [key: string]: IModule;
+}
 
 export interface ModelMap { [key: string]: any };
 
