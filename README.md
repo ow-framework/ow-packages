@@ -47,6 +47,7 @@ yarn start
 
 - [@ow-framework/core](packages/ow-core/README.md) - the core ow module
 - [@ow-framework/hello-world](packages/ow-hello-world/README.md) - a simple hello world logging module
+- [@ow-framework/koa](packages/ow-koa/README.md) - the power and elegance of [koa](https://github.com/koajs/koa) in your ow application
 
 ## About
 
