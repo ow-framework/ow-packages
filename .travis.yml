@@ -7,4 +7,4 @@ node_js:
   - "8"
 
 before_script:
-  - cd packages/ow-core && yarn build
+  - (cd packages/ow-core && yarn build)
