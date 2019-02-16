@@ -131,11 +131,6 @@
     lodash "^4.17.11"
     to-fast-properties "^2.0.0"
 
-"@ow-framework/core@^2.0.7":
-  version "2.0.7"
-  resolved "https://registry.yarnpkg.com/@ow-framework/core/-/core-2.0.7.tgz#d43f3bf7561169a816b6a34bc55ced282b5df4bb"
-  integrity sha512-kiwCMdQqW1jDbDL1IdQ+ibPZrWA9ZabTdPSAY0d0AFhn+Uc1J6XbmxClBrDpg/OKgrwdUCbhkh0+fCen01s47A==
-
 "@types/accepts@*":
   version "1.3.5"
   resolved "https://registry.yarnpkg.com/@types/accepts/-/accepts-1.3.5.tgz#c34bec115cfc746e04fe5a059df4ce7e7b391575"
@@ -202,11 +197,6 @@
   dependencies:
     "@types/events" "*"
     "@types/node" "*"
-
-"@types/get-port@^3.2.0":
-  version "3.2.0"
-  resolved "https://registry.yarnpkg.com/@types/get-port/-/get-port-3.2.0.tgz#f9e0a11443cc21336470185eae3dfba4495d29bc"
-  integrity sha512-TiNg8R1kjDde5Pub9F9vCwZA/BNW9HeXP5b9j7Qucqncy/McfPZ6xze/EyBdXS5FhMIGN6Fx3vg75l5KHy3V1Q==
 
 "@types/helmet@*":
   version "0.0.42"
@@ -320,11 +310,6 @@
   dependencies:
     "@types/express-serve-static-core" "*"
     "@types/mime" "*"
-
-"@types/sinon@^5.0.1":
-  version "5.0.7"
-  resolved "https://registry.yarnpkg.com/@types/sinon/-/sinon-5.0.7.tgz#0d9f89dd0c9988c4f1505a92a3a324ee7bdb18a6"
-  integrity sha512-opwMHufhUwkn/UUDk35LDbKJpA2VBsZT8WLU8NjayvRLGPxQkN+8XmfC2Xl35MAscBE8469koLLBjaI3XLEIww==
 
 "@types/superagent@*":
   version "3.8.6"
