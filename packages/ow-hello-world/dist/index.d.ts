@@ -1,6 +1,7 @@
 import * as Ow from '@ow-framework/core';
 export interface IHelloWorldConfig {
     theString?: string;
+    logger: typeof console.log;
 }
 /**
  * Example hello world module
@@ -11,7 +12,6 @@ export interface IHelloWorldConfig {
 declare class OwHelloWorldModule extends Ow.OwModule {
     config: IHelloWorldConfig;
     constructor(app: Ow.IApplication, opts?: IHelloWorldConfig);
-    load: () => Promise<this>;
-    ready: () => Promise<this>;
+    start: () => Promise<this>;
 }
 export default OwHelloWorldModule;

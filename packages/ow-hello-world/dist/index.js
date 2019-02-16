@@ -24,8 +24,8 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     function step(op) {
         if (f) throw new TypeError("Generator is already executing.");
         while (_) try {
-            if (f = 1, y && (t = y[op[0] & 2 ? "return" : op[0] ? "throw" : "next"]) && !(t = t.call(y, op[1])).done) return t;
-            if (y = 0, t) op = [0, t.value];
+            if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
+            if (y = 0, t) op = [op[0] & 2, t.value];
             switch (op[0]) {
                 case 0: case 1: t = op; break;
                 case 4: _.label++; return { value: op[1], done: false };
@@ -48,7 +48,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var Ow = require("@ow-framework/core");
 ;
 var defaultOptions = {
-    theString: 'Hello world!'
+    theString: 'Hello world!',
+    logger: console.log
 };
 /**
  * Example hello world module
@@ -61,23 +62,16 @@ var OwHelloWorldModule = /** @class */ (function (_super) {
     function OwHelloWorldModule(app, opts) {
         if (opts === void 0) { opts = defaultOptions; }
         var _this = _super.call(this, app, opts) || this;
-        _this.load = function () { return __awaiter(_this, void 0, void 0, function () {
-            var theString;
-            return __generator(this, function (_a) {
-                theString = this.config.theString;
-                console.log("load: " + theString);
-                return [2 /*return*/, this];
-            });
-        }); };
-        _this.ready = function () { return __awaiter(_this, void 0, void 0, function () {
-            var theString;
-            return __generator(this, function (_a) {
-                theString = this.config.theString;
-                console.log("ready: " + theString);
+        _this.start = function () { return __awaiter(_this, void 0, void 0, function () {
+            var _a, theString, logger;
+            return __generator(this, function (_b) {
+                _a = this.config, theString = _a.theString, logger = _a.logger;
+                logger("start: " + theString);
                 return [2 /*return*/, this];
             });
         }); };
         _this.config = Object.assign({}, defaultOptions, opts);
+        _this.config.logger("construct: " + _this.config.theString);
         return _this;
     }
     return OwHelloWorldModule;

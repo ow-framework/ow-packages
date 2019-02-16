@@ -31,7 +31,8 @@ import OwHelloWorld from '@ow-framework/hello-world';
 
 const app = new Ow();
 const MyHelloWorld = new OwHelloWorld(app, {
-  theString: 'Some teststring'
+  theString: 'Some teststring',
+  logger: s => console.log(s)
 })
 
 app.addModules([

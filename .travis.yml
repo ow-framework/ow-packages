@@ -1,0 +1,9 @@
+language: node_js
+node_js:
+  - "node"
+  - "lts/*"
+  - "10"
+  - "8"
+
+before_script:
+  - (cd packages/ow-core && yarn build)

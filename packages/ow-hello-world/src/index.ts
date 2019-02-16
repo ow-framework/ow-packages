@@ -1,11 +1,13 @@
 import * as Ow from '@ow-framework/core';
 
 export interface IHelloWorldConfig {
-  theString?: string
+  theString?: string,
+  logger: typeof console.log
 };
 
 const defaultOptions: IHelloWorldConfig = {
-  theString: 'Hello world!'
+  theString: 'Hello world!',
+  logger: console.log
 };
 
 /**
@@ -21,22 +23,16 @@ class OwHelloWorldModule extends Ow.OwModule {
     super(app, opts);
 
     this.config = Object.assign({}, defaultOptions, opts);
+
+    this.config.logger(`construct: ${this.config.theString}`);
     
     return this;
   }
 
-  load = async () => {
-    const { config: { theString } } = this;
+  start = async () => {
+    const { theString, logger } = this.config;
 
-    console.log(`load: ${theString}`);
-
-    return this;
-  }
-
-  ready = async () => {
-    const { theString } = this.config;
-
-    console.log(`ready: ${theString}`);
+    logger(`start: ${theString}`);
 
     return this;
   }
