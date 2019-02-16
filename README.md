@@ -1,6 +1,6 @@
 <img src="_media/ow-logo.png" width="100" />
 
-[![Build Status](https://travis-ci.org/ow-framework/ow-packages.svg?branch=master)](https://travis-ci.org/ow-framework/ow-packages)
+[![Build Status](https://travis-ci.org/ow-framework/ow-packages.svg?branch=master)](https://travis-ci.org/ow-framework/ow-packages) [![Greenkeeper badge](https://badges.greenkeeper.io/ow-framework/ow-packages.svg)](https://greenkeeper.io/)
 
 # @ow-framework/*
 
