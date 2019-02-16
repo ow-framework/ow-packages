@@ -33,7 +33,7 @@ class Application implements IApplication {
   };
 
   private started = false;
-  private unhandledRejectionHandler: () => void = noop;
+  private unhandledRejectionHandler: (error: Error) => void = noop;
 
   constructor({ silent = false }: IApplicationOptions = {}) {
     if (typeof this.logger.debug === 'undefined') {
