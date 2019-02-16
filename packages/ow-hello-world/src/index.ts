@@ -2,7 +2,7 @@ import * as Ow from '@ow-framework/core';
 
 export interface IHelloWorldConfig {
   theString?: string,
-  logger?: typeof console.log
+  logger: typeof console.log
 };
 
 const defaultOptions: IHelloWorldConfig = {

@@ -131,6 +131,11 @@
     lodash "^4.17.11"
     to-fast-properties "^2.0.0"
 
+"@ow-framework/core@^2.0.7":
+  version "2.0.7"
+  resolved "https://registry.yarnpkg.com/@ow-framework/core/-/core-2.0.7.tgz#d43f3bf7561169a816b6a34bc55ced282b5df4bb"
+  integrity sha512-kiwCMdQqW1jDbDL1IdQ+ibPZrWA9ZabTdPSAY0d0AFhn+Uc1J6XbmxClBrDpg/OKgrwdUCbhkh0+fCen01s47A==
+
 "@types/accepts@*":
   version "1.3.5"
   resolved "https://registry.yarnpkg.com/@types/accepts/-/accepts-1.3.5.tgz#c34bec115cfc746e04fe5a059df4ce7e7b391575"

@@ -5,3 +5,6 @@ node_js:
   - "10"
   - "9"
   - "8"
+
+before_script:
+  - cd packages/ow-core && yarn build

@@ -66,7 +66,7 @@ describe('Application', () => {
 
     await app.start();
 
-    app.router.get('/test-route', ctx => ctx.body = 'it works');
+    app.router.get('/test-route', (ctx: Koa.BaseContext) => ctx.body = 'it works');
 
 
     const res = await request(app.koa.callback())

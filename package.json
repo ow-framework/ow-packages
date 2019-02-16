@@ -1,6 +1,7 @@
 {
 	"scripts": {
 		"postinstall": "lerna bootstrap",
+		"build": "lerna exec \"npm run build\"",
 		"test": "lerna exec \"npm run test\""
 	},
 	"devDependencies": {
