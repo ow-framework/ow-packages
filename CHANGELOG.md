@@ -1,5 +1,10 @@
 # Changelog
 
+## v2.1.1 (16/02/2019)
+- [v2.1.1](https://github.com/ow-framework/ow-packages/commit/95fece9a7059909bc86867a8806c38801eb845ea) - @flipace
+
+---
+
 ## v2.1.0 (16/02/2019)
 - [v2.1.0](https://github.com/ow-framework/ow-packages/commit/d4f698a822df037ac36d0520ec5a5bd8f6a7c348) - @flipace
 - [ow-core: fix: unhandledRejectionError typing, lockfiles](https://github.com/ow-framework/ow-packages/commit/d0c61330bc0a96959d288d386c6cdc463910495a) - @flipace
