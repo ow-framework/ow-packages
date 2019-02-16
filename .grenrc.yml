@@ -1,0 +1,10 @@
+---
+  dataSource: "commits"
+  prefix: ""
+  onlyMilestones: false
+  groupBy: {
+    "New Features": ["feature"],
+    "Enhancements": ["enhancement", "internal"],
+    "Bug Fixes": ["bug"]
+  }
+  changelogFilename: "CHANGELOG.md"
