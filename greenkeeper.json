@@ -1,0 +1,12 @@
+{
+  "groups": {
+    "default": {
+      "packages": [
+        "package.json",
+        "packages/ow-core/package.json",
+        "packages/ow-hello-world/package.json",
+        "packages/ow-koa/package.json"
+      ]
+    }
+  }
+}
