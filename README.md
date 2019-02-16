@@ -1,5 +1,7 @@
 <img src="_media/ow-logo.png" width="100" />
 
+[![Build Status](https://travis-ci.org/ow-framework/ow-packages.svg?branch=master)](https://travis-ci.org/ow-framework/ow-packages)
+
 # @ow-framework/*
 
 **ow** [pronounced: oouhh] is a node.js framework which enforces certain patterns and restrictions in order to provide you with a stable, testable and modular application architecture.
