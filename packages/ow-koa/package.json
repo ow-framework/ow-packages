@@ -16,7 +16,7 @@
     "@ow-framework/core": "^2.0.7",
     "@types/koa": "^2.0.46",
     "@types/koa-router": "^7.0.28",
-    "@types/node": "^10.3.1",
+    "@types/node": "^11.9.4",
     "@types/jest": "^24.0.5",
     "@types/koa-helmet": "^3.1.2",
     "@types/koa-mount": "^3.0.1",
@@ -24,7 +24,7 @@
     "@types/supertest": "^2.0.7",
     "koa": "^2.5.1",
     "supertest": "^3.4.2",
-    "typescript": "^2.9.1",
+    "typescript": "^3.3.3",
     "jest": "^24.1.0",
     "ts-jest": "^23.10.5"
   },
@@ -34,9 +34,9 @@
   "dependencies": {
     "koa-body": "^4.0.1",
     "koa-helmet": "^4.0.0",
-    "koa-mount": "^3.0.0",
+    "koa-mount": "^4.0.0",
     "koa-router": "^7.4.0",
-    "koa-static": "^4.0.3"
+    "koa-static": "^5.0.0"
   },
   "publishConfig": {
     "access": "public"
