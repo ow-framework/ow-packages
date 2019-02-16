@@ -36,7 +36,7 @@ declare module '@ow-framework/core' {
 }
 
 declare module 'koa' {
-  interface Context {
+  interface BaseContext {
     $cache: { [key: string]: any }
   }
 }
