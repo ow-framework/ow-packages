@@ -1,6 +1,6 @@
 {
   "name": "@ow-framework/koa",
-  "version": "2.1.1",
+  "version": "2.1.2",
   "description": "",
   "main": "dist/index",
   "types": "./dist",
@@ -13,7 +13,8 @@
   "author": "flipace <neschkudla@gmail.com>",
   "license": "MIT",
   "devDependencies": {
-    "@ow-framework/core": "^2.1.1",
+    "@ow-framework/core": "^2.1.2",
+    "@types/get-port": "^4.2.0",
     "@types/jest": "^24.0.5",
     "@types/koa": "^2.0.46",
     "@types/koa-helmet": "^3.1.2",
@@ -32,6 +33,7 @@
     "@ow-framework/core": "^2.0.7"
   },
   "dependencies": {
+    "get-port": "^4.2.0",
     "koa-body": "^4.0.1",
     "koa-helmet": "^4.0.0",
     "koa-mount": "^4.0.0",
