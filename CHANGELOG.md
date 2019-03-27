@@ -1,5 +1,11 @@
 # Changelog
 
+## v2.1.2 (27/03/2019)
+- [v2.1.2](https://github.com/ow-framework/ow-packages/commit/86232580ba02b99c0b2fd5f89ca74aaeb3a1db0d) - @falkenhawk
+- [ow-koa: fix: restored get-port dependency](https://github.com/ow-framework/ow-packages/commit/7706fab4f5d7cefa029060ff5b9f832c3f339b48) - @falkenhawk
+
+---
+
 ## v2.1.1 (16/02/2019)
 - [v2.1.1](https://github.com/ow-framework/ow-packages/commit/95fece9a7059909bc86867a8806c38801eb845ea) - @flipace
 
@@ -30,9 +36,9 @@
 ---
 
 ## v2.0.7 (10/07/2018)
-- [v2.0.7](https://github.com/ow-framework/ow-packages/commit/6fb796d98bde6dd702fdba85b7945b7aaf1251fc) - @unhawkable
-- [@ow-framework/core: made ModuleMap type an interface for easier extendability](https://github.com/ow-framework/ow-packages/commit/1f52dff58541a4c23eabadbe286a6e4f382dcc8a) - @unhawkable
-- [docs: added ow-koa package to main readme](https://github.com/ow-framework/ow-packages/commit/b8c281da47f678b2bf7e055c023825e27cd050c7) - @unhawkable
+- [v2.0.7](https://github.com/ow-framework/ow-packages/commit/6fb796d98bde6dd702fdba85b7945b7aaf1251fc) - @falkenhawk
+- [@ow-framework/core: made ModuleMap type an interface for easier extendability](https://github.com/ow-framework/ow-packages/commit/1f52dff58541a4c23eabadbe286a6e4f382dcc8a) - @falkenhawk
+- [docs: added ow-koa package to main readme](https://github.com/ow-framework/ow-packages/commit/b8c281da47f678b2bf7e055c023825e27cd050c7) - @falkenhawk
 - [@ow-framework/hello-world: moved jest to devDependencies](https://github.com/ow-framework/ow-packages/commit/9965019f62de74daf64ab1ca60b186086710e8f2) - @flipace
 - [@ow-framework/hello-world: moved jest to devDependencies](https://github.com/ow-framework/ow-packages/commit/6cff165faa91a31449a4b2230d373cf706fd690a) - @flipace
 
