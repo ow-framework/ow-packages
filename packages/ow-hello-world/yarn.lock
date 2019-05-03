@@ -131,10 +131,10 @@
     lodash "^4.17.11"
     to-fast-properties "^2.0.0"
 
-"@ow-framework/core@^2.1.1":
-  version "2.1.1"
-  resolved "https://registry.yarnpkg.com/@ow-framework/core/-/core-2.1.1.tgz#ffaabfb896cebef71e0ad0138798e05f4c55b819"
-  integrity sha512-+Wy/HpKa3yIOLcKY4g2HbmN/BPYp41VXZ+flrL6GypguGW1HxsyVThPGLTgIi8+L869Z5bHvE/lP+hgwz58Nrw==
+"@ow-framework/core@^2.1.2":
+  version "2.1.2"
+  resolved "https://registry.yarnpkg.com/@ow-framework/core/-/core-2.1.2.tgz#b80794ff31a5e61e8aaa09ecaf470e5f5b2460f1"
+  integrity sha512-gztxaBNCyApNtTGB7TAvKhuW6hx08wEqYmO8cAHfzrSRfSNnP8jFdgMA2QcIN/ESp8fxmhWVIRK9KuszGUZvPA==
 
 "@types/jest-diff@*":
   version "20.0.1"
@@ -148,10 +148,10 @@
   dependencies:
     "@types/jest-diff" "*"
 
-"@types/node@^11.9.4":
-  version "11.9.4"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-11.9.4.tgz#ceb0048a546db453f6248f2d1d95e937a6f00a14"
-  integrity sha512-Zl8dGvAcEmadgs1tmSPcvwzO1YRsz38bVJQvH1RvRqSR9/5n61Q1ktcDL0ht3FXWR+ZpVmXVwN1LuH4Ax23NsA==
+"@types/node@^12.0.0":
+  version "12.0.0"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-12.0.0.tgz#d11813b9c0ff8aaca29f04cbc12817f4c7d656e5"
+  integrity sha512-Jrb/x3HT4PTJp6a4avhmJCDEVrPdqLfl3e8GGMbpkGGdwAV5UGlIs4vVEfsHHfylZVOKZWpOqmqFH8CbfOZ6kg==
 
 abab@^2.0.0:
   version "2.0.0"
