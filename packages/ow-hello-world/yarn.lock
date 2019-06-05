@@ -131,10 +131,10 @@
     lodash "^4.17.11"
     to-fast-properties "^2.0.0"
 
-"@ow-framework/core@^2.1.1":
-  version "2.1.1"
-  resolved "https://registry.yarnpkg.com/@ow-framework/core/-/core-2.1.1.tgz#ffaabfb896cebef71e0ad0138798e05f4c55b819"
-  integrity sha512-+Wy/HpKa3yIOLcKY4g2HbmN/BPYp41VXZ+flrL6GypguGW1HxsyVThPGLTgIi8+L869Z5bHvE/lP+hgwz58Nrw==
+"@ow-framework/core@^2.1.2":
+  version "2.1.2"
+  resolved "https://registry.yarnpkg.com/@ow-framework/core/-/core-2.1.2.tgz#b80794ff31a5e61e8aaa09ecaf470e5f5b2460f1"
+  integrity sha512-gztxaBNCyApNtTGB7TAvKhuW6hx08wEqYmO8cAHfzrSRfSNnP8jFdgMA2QcIN/ESp8fxmhWVIRK9KuszGUZvPA==
 
 "@types/jest-diff@*":
   version "20.0.1"
@@ -1828,9 +1828,9 @@ jest@^24.1.0:
   integrity sha512-RdJUflcE3cUzKiMqQgsCu06FPu9UdIJO0beYbPhHN4k6apgJtifcoCtT9bcxOpYBtpD2kCM6Sbzg4CausW/PKQ==
 
 js-yaml@^3.12.0:
-  version "3.12.1"
-  resolved "https://registry.yarnpkg.com/js-yaml/-/js-yaml-3.12.1.tgz#295c8632a18a23e054cf5c9d3cecafe678167600"
-  integrity sha512-um46hB9wNOKlwkHgiuyEVAybXBjwFUV0Z/RaHJblRd9DXltue9FTYvzCr9ErQrK9Adz5MU4gHWVaNUfdmrC8qA==
+  version "3.13.1"
+  resolved "https://registry.yarnpkg.com/js-yaml/-/js-yaml-3.13.1.tgz#aff151b30bfdfa8e49e05da22e7415e9dfa37847"
+  integrity sha512-YfbcO7jXDdyj0DGxYVSlSeQNHbD7XPWvrVWeVUujrQEoZzWJIRrCPoyk6kL6IAjAG2IolMK4T0hNUe0HOUs5Jw==
   dependencies:
     argparse "^1.0.7"
     esprima "^4.0.0"
