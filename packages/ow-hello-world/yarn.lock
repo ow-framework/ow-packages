@@ -131,10 +131,10 @@
     lodash "^4.17.11"
     to-fast-properties "^2.0.0"
 
-"@ow-framework/core@^2.1.1":
-  version "2.1.1"
-  resolved "https://registry.yarnpkg.com/@ow-framework/core/-/core-2.1.1.tgz#ffaabfb896cebef71e0ad0138798e05f4c55b819"
-  integrity sha512-+Wy/HpKa3yIOLcKY4g2HbmN/BPYp41VXZ+flrL6GypguGW1HxsyVThPGLTgIi8+L869Z5bHvE/lP+hgwz58Nrw==
+"@ow-framework/core@^2.1.2":
+  version "2.1.2"
+  resolved "https://registry.yarnpkg.com/@ow-framework/core/-/core-2.1.2.tgz#b80794ff31a5e61e8aaa09ecaf470e5f5b2460f1"
+  integrity sha512-gztxaBNCyApNtTGB7TAvKhuW6hx08wEqYmO8cAHfzrSRfSNnP8jFdgMA2QcIN/ESp8fxmhWVIRK9KuszGUZvPA==
 
 "@types/jest-diff@*":
   version "20.0.1"
@@ -1992,9 +1992,9 @@ lodash.sortby@^4.7.0:
   integrity sha1-7dFMgk4sycHgsKG0K7UhBRakJDg=
 
 lodash@^4.17.10, lodash@^4.17.11:
-  version "4.17.11"
-  resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.11.tgz#b39ea6229ef607ecd89e2c8df12536891cac9b8d"
-  integrity sha512-cQKh8igo5QUhZ7lg38DYWAxMvjSAKG0A8wGSVimP07SIUEK2UO+arSRKbRZWtelMtN5V0Hkwh5ryOto/SshYIg==
+  version "4.17.14"
+  resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.14.tgz#9ce487ae66c96254fe20b599f21b6816028078ba"
+  integrity sha512-mmKYbW3GLuJeX+iGP+Y7Gp1AiGHGbXHCOh/jZmrawMmsE7MS4znI3RL2FsjbqOyMayHInjOeykW7PEajUk1/xw==
 
 loose-envify@^1.0.0:
   version "1.4.0"
