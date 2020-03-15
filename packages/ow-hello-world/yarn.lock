@@ -131,10 +131,10 @@
     lodash "^4.17.11"
     to-fast-properties "^2.0.0"
 
-"@ow-framework/core@^2.1.1":
-  version "2.1.1"
-  resolved "https://registry.yarnpkg.com/@ow-framework/core/-/core-2.1.1.tgz#ffaabfb896cebef71e0ad0138798e05f4c55b819"
-  integrity sha512-+Wy/HpKa3yIOLcKY4g2HbmN/BPYp41VXZ+flrL6GypguGW1HxsyVThPGLTgIi8+L869Z5bHvE/lP+hgwz58Nrw==
+"@ow-framework/core@^2.1.2":
+  version "2.1.2"
+  resolved "https://registry.yarnpkg.com/@ow-framework/core/-/core-2.1.2.tgz#b80794ff31a5e61e8aaa09ecaf470e5f5b2460f1"
+  integrity sha512-gztxaBNCyApNtTGB7TAvKhuW6hx08wEqYmO8cAHfzrSRfSNnP8jFdgMA2QcIN/ESp8fxmhWVIRK9KuszGUZvPA==
 
 "@types/jest-diff@*":
   version "20.0.1"
@@ -177,9 +177,9 @@ acorn-walk@^6.0.1:
   integrity sha512-OtUw6JUTgxA2QoqqmrmQ7F2NYqiBPi/L2jqHyFtllhOUvXYQXf0Z1CYUinIfyT4bTCGmrA7gX9FvHA81uzCoVw==
 
 acorn@^5.5.3:
-  version "5.7.3"
-  resolved "https://registry.yarnpkg.com/acorn/-/acorn-5.7.3.tgz#67aa231bf8812974b85235a96771eb6bd07ea279"
-  integrity sha512-T/zvzYRfbVojPWahDsE5evJdHb3oJoQfFbsrKM7w5Zcs++Tr257tia3BmMP8XYVjp1S9RZXQMh7gao96BlqZOw==
+  version "5.7.4"
+  resolved "https://registry.yarnpkg.com/acorn/-/acorn-5.7.4.tgz#3e8d8a9947d0599a1796d10225d7432f4a4acf5e"
+  integrity sha512-1D++VG7BhrtvQpNbBzovKNc1FLGGEE/oGe7b9xJm/RFHMBeUaUGpluV9RLjZa47YFdPcDAenEYuq9pQPcMdLJg==
 
 acorn@^6.0.1:
   version "6.1.0"
