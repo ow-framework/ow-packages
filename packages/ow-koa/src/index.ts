@@ -99,7 +99,7 @@ export default class OwKoa extends Ow.OwModule {
     if (this.config.staticFolder) {
       app.koa.use(mount('/static', koaStatic(this.config.staticFolder)));
     }
-console.log(this.config)
+
     return this;
   }
 
