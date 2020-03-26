@@ -4,8 +4,8 @@ export function getThenable(): Promise<void> {
   return Promise.resolve();
 }
 
-export function unhandledRejection(logger: Console, error: Error) {
-  logger.error(error);
+export function unhandledRejection(logger: Console, reason: {} | null | undefined) {
+  logger.error(reason);
 }
 
 export const noopLogger = <Console>{
