@@ -4,6 +4,7 @@ import * as mount from 'koa-mount';
 import * as koaStatic from 'koa-static';
 import * as KoaBody from 'koa-body';
 import * as Helmet from 'koa-helmet';
+import Debug from 'debug';
 import * as Ow from '@ow-framework/core';
 
 import { Server } from 'http';
@@ -11,12 +12,26 @@ import { Server } from 'http';
 import { IHelmetConfiguration } from 'helmet';
 
 const getPort = require('get-port');
+const debug = Debug('ow-koa');
 
 export interface IKoaConfig {
+  /** Port to listen for requests (default: random available port via get-port https://www.npmjs.com/package/get-port) */
   port?: number;
+
+  /** If configured, serves the given path under /static route (default: undefined) */
   staticFolder?: string;
+
+  /** If enabled, will apply body parser middleware on all requests (default: true) https://www.npmjs.com/package/koa-body */
   enableBodyParser?: boolean | KoaBody.IKoaBodyOptions;
+
+  /** If enabled, will apply helmet middleware on all requests (default: true) https://www.npmjs.com/package/koa-helmet */
   enableHelmet?: boolean | IHelmetConfiguration;
+  
+  /** Enables/Disables request time middleware (such as request time logging) (default: false) */
+  enableRequestTimeMiddleware?: boolean;
+
+  /** Enables/Disables context $cache middleware (default: false) */
+  enableContextCacheMiddleware?: boolean;
 };
 
 declare module '@ow-framework/core' {
@@ -52,7 +67,8 @@ export default class OwKoa extends Ow.OwModule {
     port: undefined,
     enableBodyParser: true,
     enableHelmet: true,
-    staticFolder: './static/'
+    enableRequestTimeMiddleware: false,
+    enableContextCacheMiddleware: false,
   };
   
   port?: number;
@@ -68,18 +84,20 @@ export default class OwKoa extends Ow.OwModule {
 
     app.koa.proxy = true;
 
-    if (config.enableHelmet) {
-      const helmetOptions = typeof config.enableHelmet === 'object' ? config.enableHelmet : undefined;
+    this.config = Object.assign(this.config, config);
+
+    if (this.config.enableHelmet) {
+      const helmetOptions = typeof this.config.enableHelmet === 'object' ? this.config.enableHelmet : undefined;
       app.koa.use(Helmet(helmetOptions));
     }
 
-    if (config.enableBodyParser) {
-      const bodyOptions = typeof config.enableBodyParser === 'object' ? config.enableBodyParser : undefined;
+    if (this.config.enableBodyParser) {
+      const bodyOptions = typeof this.config.enableBodyParser === 'object' ? this.config.enableBodyParser : undefined;
       app.koa.use(KoaBody(bodyOptions));
     }
 
-    if (config.staticFolder) {
-      app.koa.use(mount('/static', koaStatic(config.staticFolder)));
+    if (this.config.staticFolder) {
+      app.koa.use(mount('/static', koaStatic(this.config.staticFolder)));
     }
 
     return this;
@@ -112,20 +130,24 @@ export default class OwKoa extends Ow.OwModule {
       ctx.body = 'ok';
     });
 
-    // attach a new $cache objcet for each request
-    koa.use(async (ctx: Koa.Context, next: Function) => {
-      ctx.$cache = {};
-      await next();
-    });
+    if (this.config.enableContextCacheMiddleware) {
+      // attach a new $cache objcet for each request
+      koa.use(async (ctx: Koa.Context, next: Function) => {
+        ctx.$cache = {};
+        await next();
+      });
+    }
 
-    // attach request time middleware
-    koa.use(async (ctx: Koa.Context, next: Function) => {
-      const start = Date.now();
+    if (this.config.enableRequestTimeMiddleware) {
+      // attach request time middleware
+      koa.use(async (ctx: Koa.Context, next: Function) => {
+        const start = Date.now();
 
-      await next();
+        await next();
 
-      logger.debug(`Time: ${Date.now() - start}ms`);
-    });
+        debug(`Time: ${Date.now() - start}ms`);
+      });
+    }
 
     koa.use(router.routes());
     koa.use(router.allowedMethods());
