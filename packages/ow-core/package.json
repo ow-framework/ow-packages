@@ -1,6 +1,6 @@
 {
   "name": "@ow-framework/core",
-  "version": "3.0.0",
+  "version": "3.0.1",
   "description": "",
   "main": "./dist/index.js",
   "types": "./dist",
