@@ -6,8 +6,8 @@ function getThenable() {
     return Promise.resolve();
 }
 exports.getThenable = getThenable;
-function unhandledRejection(logger, error) {
-    logger.error(error);
+function unhandledRejection(logger, reason) {
+    logger.error(reason);
 }
 exports.unhandledRejection = unhandledRejection;
 exports.noopLogger = {

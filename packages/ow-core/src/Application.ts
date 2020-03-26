@@ -33,7 +33,7 @@ class Application implements IApplication {
   };
 
   private started = false;
-  private unhandledRejectionHandler: (error: Error) => void = noop;
+  private unhandledRejectionHandler: (reason: {} | null | undefined) => void = noop;
 
   constructor({ silent = false }: IApplicationOptions = {}) {
     if (typeof this.logger.debug === 'undefined') {
@@ -44,7 +44,7 @@ class Application implements IApplication {
       this.logger = noopLogger;
     }
 
-    this.unhandledRejectionHandler = unhandledRejection.bind(this, this.logger);
+    this.unhandledRejectionHandler = reason => unhandledRejection(this.logger, reason);
 
     process.on('unhandledRejection', this.unhandledRejectionHandler);
 
@@ -211,7 +211,7 @@ class Application implements IApplication {
   };
 
   stop = async (): Promise<IApplication> => {
-    process.removeListener(
+    process.off(
       'unhandledRejection',
       this.unhandledRejectionHandler,
     );
