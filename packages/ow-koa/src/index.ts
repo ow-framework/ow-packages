@@ -84,20 +84,22 @@ export default class OwKoa extends Ow.OwModule {
 
     app.koa.proxy = true;
 
-    if (config.enableHelmet) {
-      const helmetOptions = typeof config.enableHelmet === 'object' ? config.enableHelmet : undefined;
+    this.config = Object.assign(this.config, config);
+
+    if (this.config.enableHelmet) {
+      const helmetOptions = typeof this.config.enableHelmet === 'object' ? this.config.enableHelmet : undefined;
       app.koa.use(Helmet(helmetOptions));
     }
 
-    if (config.enableBodyParser) {
-      const bodyOptions = typeof config.enableBodyParser === 'object' ? config.enableBodyParser : undefined;
+    if (this.config.enableBodyParser) {
+      const bodyOptions = typeof this.config.enableBodyParser === 'object' ? this.config.enableBodyParser : undefined;
       app.koa.use(KoaBody(bodyOptions));
     }
 
-    if (config.staticFolder) {
-      app.koa.use(mount('/static', koaStatic(config.staticFolder)));
+    if (this.config.staticFolder) {
+      app.koa.use(mount('/static', koaStatic(this.config.staticFolder)));
     }
-
+console.log(this.config)
     return this;
   }
 
