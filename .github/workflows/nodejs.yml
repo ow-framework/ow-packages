@@ -1,0 +1,38 @@
+name: Node.js CI
+
+on: push
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [10.x, 12.x, 14.x]
+        install: [lock, latest, lowest]
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Install root dependencies
+        # --ignore-scripts to disable postinstall script (lerna bootstrap)
+        run: yarn install --ignore-scripts
+
+      - if: matrix.install == 'lock'
+        name: "Packages: install dependencies from lockfiles"
+        run: npx lerna bootstrap -- --frozen-lockfile
+
+      - if: matrix.install == 'latest'
+        name: "Packages: install latest dependencies for defined ranges"
+        run: npx lerna bootstrap -- --no-lockfile
+
+      - if: matrix.install == 'lowest'
+        name: "Packages: install lowest possible dependencies for defined ranges"
+        run: npx pin-dependencies packages/**/package.json --yarn
+
+      - run: npx lerna run build
+      - run: npx lerna run test
