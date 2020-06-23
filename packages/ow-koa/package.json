@@ -7,7 +7,7 @@
   "scripts": {
     "build": "tsc",
     "prepublishOnly": "npm run build",
-    "test": "SILENT=1 jest src"
+    "test": "jest src"
   },
   "keywords": [],
   "author": "flipace <neschkudla@gmail.com>",

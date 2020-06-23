@@ -57,7 +57,7 @@ Created with passion by the folks at [ovos](https://ovos.at) and
 other awesome thinkers.
 
 [@flipace](https://github.com/flipace),
-[@unhawkable](https://github.com/unhawkable), [@denisloncaric](https://github.com/denisloncaric), [@saschagalley](https://github.com/saschagalley)
+[@falkenhawk](https://github.com/falkenhawk), [@denisloncaric](https://github.com/denisloncaric), [@saschagalley](https://github.com/saschagalley)
 
 ## License
 

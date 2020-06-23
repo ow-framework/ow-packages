@@ -21,7 +21,7 @@
     "typescript": "^3.3.3"
   },
   "peerDependencies": {
-    "@ow-framework/core": "^2.0.7"
+    "@ow-framework/core": "^3.0.2"
   },
   "publishConfig": {
     "access": "public"
