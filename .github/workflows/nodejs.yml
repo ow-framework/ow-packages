@@ -32,7 +32,11 @@ jobs:
 
       - if: matrix.install == 'lowest'
         name: "Packages: install lowest possible dependencies for defined ranges"
-        run: npx github:ovos/pin-dependencies packages/**/package.json --yarn
+        # use pin-dependencies to pin ranges to the lowest, defined version (uses yarn add --exact internally)
+        # then lerna bootstrap to install devDependencies
+        run: |
+          npx github:ovos/pin-dependencies packages/**/package.json --yarn
+          npx lerna bootstrap -- --frozen-lockfile
 
       - run: npx lerna run build
       - run: npx lerna run test
