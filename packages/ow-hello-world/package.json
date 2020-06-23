@@ -14,10 +14,10 @@
   "license": "ISC",
   "devDependencies": {
     "@ow-framework/core": "^3.0.2",
-    "@types/jest": "^24.0.5",
-    "@types/node": "^11.9.4",
-    "jest": "^24.1.0",
-    "ts-jest": "^24.0.0",
+    "@types/jest": "^26.0.0",
+    "@types/node": "^14.0.13",
+    "jest": "^26.0.1",
+    "ts-jest": "^26.1.1",
     "typescript": "^3.3.3"
   },
   "peerDependencies": {
