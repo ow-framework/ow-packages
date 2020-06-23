@@ -1,15 +1,13 @@
 {
-	"scripts": {
-		"postinstall": "lerna bootstrap",
-		"build": "lerna exec \"npm run build\"",
-		"test": "lerna exec \"npm run test\"",
-		"prepublish": "gren changelog -G -o --tags=all",
-		"postpublish": "gren release"
-	},
-	"devDependencies": {
-		"@lerna/version": "^3.13.0",
-		"github-release-notes": "^0.17.0",
-		"lerna": "^3.13.0",
-		"ts-jest": "^24.0.0"
-	}
+  "scripts": {
+    "postinstall": "lerna bootstrap",
+    "build": "lerna run build",
+    "test": "lerna run test",
+    "prepublishOnly": "gren changelog -G -o --tags=all",
+    "postpublishOnly": "gren release"
+  },
+  "devDependencies": {
+    "github-release-notes": "^0.17.0",
+    "lerna": "^3.13.0"
+  }
 }
