@@ -1,6 +1,6 @@
 {
   "name": "@ow-framework/koa",
-  "version": "3.0.2",
+  "version": "4.0.0",
   "description": "",
   "main": "dist/index",
   "types": "./dist",
@@ -13,7 +13,7 @@
   "author": "flipace <neschkudla@gmail.com>",
   "license": "MIT",
   "devDependencies": {
-    "@ow-framework/core": "^3.0.2",
+    "@ow-framework/core": "^4.0.0",
     "@types/debug": "^4.1.5",
     "@types/get-port": "^4.2.0",
     "@types/jest": "^26.0.0",
@@ -31,7 +31,7 @@
     "typescript": "^3.3.3"
   },
   "peerDependencies": {
-    "@ow-framework/core": "^3.0.2"
+    "@ow-framework/core": "^4.0.0"
   },
   "dependencies": {
     "@koa/router": "^9.3.1",
