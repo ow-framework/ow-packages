@@ -1,5 +1,13 @@
 # Changelog
 
+## v4.0.0 (14/07/2020)
+- cleanup [#60](https://github.com/ow-framework/ow-packages/pull/60)
+- bump dev dependencies [#61](https://github.com/ow-framework/ow-packages/pull/61)
+- bump koa dependencies [#62](https://github.com/ow-framework/ow-packages/pull/62)
+  - possibly breaking change: switch from `koa-router` to `@koa/router`
+
+---
+
 ## v3.0.2 (26/03/2020)
 - [v3.0.2](https://github.com/ow-framework/ow-packages/commit/219e4d9a5090fb533819ea4f7d19811a3cb129a6) - @flipace
 - [remove console.log :sob:](https://github.com/ow-framework/ow-packages/commit/a7f23d9d49d7489ee3ebc1895568bebc337c4d72) - @flipace
