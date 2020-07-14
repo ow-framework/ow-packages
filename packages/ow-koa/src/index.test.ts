@@ -1,6 +1,6 @@
 import Ow from '@ow-framework/core';
 import * as Koa from 'koa';
-import * as KoaRouter from 'koa-router';
+import * as KoaRouter from '@koa/router';
 import * as request from 'supertest';
 
 import OwKoa from './index';
