@@ -464,10 +464,10 @@
     "@types/yargs" "^15.0.0"
     chalk "^4.0.0"
 
-"@ow-framework/core@^3.0.2":
-  version "3.0.2"
-  resolved "https://registry.yarnpkg.com/@ow-framework/core/-/core-3.0.2.tgz#fc94761caf9aa81d04eba8d9db2e8101cb797f27"
-  integrity sha512-j9Q46is/t8ZD2q+7HpL9ddJv1SFkgCz3NhdLOAVu2ZY192JeIpE8A90JRfkomjd1D2mNon+/cCr6FKTN83IKoA==
+"@ow-framework/core@^4.0.0":
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/@ow-framework/core/-/core-4.0.0.tgz#6fa3e6b666271a8ca3877c82cbce380a2002073e"
+  integrity sha512-ien1kU0t4kQ2jpqQFVpu9ULJQWQpjB2e3B8jF/JYqRVSJyUInso68RMMlpk9T9mpvhy+gq+5D7raJg4Vy1P7fA==
 
 "@sinonjs/commons@^1.7.0":
   version "1.8.0"
@@ -2367,9 +2367,9 @@ lodash.sortby@^4.7.0:
   integrity sha1-7dFMgk4sycHgsKG0K7UhBRakJDg=
 
 lodash@^4.17.13, lodash@^4.17.15:
-  version "4.17.15"
-  resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.15.tgz#b447f6670a0455bbfeedd11392eff330ea097548"
-  integrity sha512-8xOcRHvCjnocdS5cpwXQXVzmmh5e5+saE2QGoeQmbKmRS6J3VQppPOIt0MnmE+4xlZoumy0GPG0D0MVIQbNA1A==
+  version "4.17.19"
+  resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.19.tgz#e48ddedbe30b3321783c5b4301fbd353bc1e4a4b"
+  integrity sha512-JNvd8XER9GQX0v2qJgsaN/mzFCNA5BRe/j8JN9d+tWyGLSodKQHKFicdwNYzWwI3wjRnaKPsGj1XkBjx/F96DQ==
 
 make-dir@^3.0.0:
   version "3.1.0"
