@@ -464,10 +464,10 @@
     "@types/yargs" "^15.0.0"
     chalk "^4.0.0"
 
-"@ow-framework/core@^3.0.2":
-  version "3.0.2"
-  resolved "https://registry.yarnpkg.com/@ow-framework/core/-/core-3.0.2.tgz#fc94761caf9aa81d04eba8d9db2e8101cb797f27"
-  integrity sha512-j9Q46is/t8ZD2q+7HpL9ddJv1SFkgCz3NhdLOAVu2ZY192JeIpE8A90JRfkomjd1D2mNon+/cCr6FKTN83IKoA==
+"@ow-framework/core@^4.0.0":
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/@ow-framework/core/-/core-4.0.0.tgz#6fa3e6b666271a8ca3877c82cbce380a2002073e"
+  integrity sha512-ien1kU0t4kQ2jpqQFVpu9ULJQWQpjB2e3B8jF/JYqRVSJyUInso68RMMlpk9T9mpvhy+gq+5D7raJg4Vy1P7fA==
 
 "@sinonjs/commons@^1.7.0":
   version "1.8.0"
@@ -3597,9 +3597,9 @@ xmlchars@^2.2.0:
   integrity sha512-JZnDKK8B0RCDw84FNdDAIpZK+JuJw+s7Lz8nksI7SIuU3UXJJslUthsi+uWBUYOwPFwW7W7PRLRfUKpxjtjFCw==
 
 y18n@^4.0.0:
-  version "4.0.0"
-  resolved "https://registry.yarnpkg.com/y18n/-/y18n-4.0.0.tgz#95ef94f85ecc81d007c264e190a120f0a3c8566b"
-  integrity sha512-r9S/ZyXu/Xu9q1tYlpsLIsa3EeLXXk0VwlxqTcFRfg9EhMW+17kbt9G0NrgCmhGb5vT2hyhJZLfDGx+7+5Uj/w==
+  version "4.0.1"
+  resolved "https://registry.yarnpkg.com/y18n/-/y18n-4.0.1.tgz#8db2b83c31c5d75099bb890b23f3094891e247d4"
+  integrity sha512-wNcy4NvjMYL8gogWWYAO7ZFWFfHcbdbE57tZO8e4cbpj8tfUcwrwqSl3ad8HxpYWCdXcJUCeKKZS62Av1affwQ==
 
 yargs-parser@18.x, yargs-parser@^18.1.1:
   version "18.1.3"
