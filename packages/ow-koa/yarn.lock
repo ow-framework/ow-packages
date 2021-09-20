@@ -475,10 +475,10 @@
     methods "^1.1.2"
     path-to-regexp "^6.1.0"
 
-"@ow-framework/core@^3.0.2":
-  version "3.0.2"
-  resolved "https://registry.yarnpkg.com/@ow-framework/core/-/core-3.0.2.tgz#fc94761caf9aa81d04eba8d9db2e8101cb797f27"
-  integrity sha512-j9Q46is/t8ZD2q+7HpL9ddJv1SFkgCz3NhdLOAVu2ZY192JeIpE8A90JRfkomjd1D2mNon+/cCr6FKTN83IKoA==
+"@ow-framework/core@^4.0.0":
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/@ow-framework/core/-/core-4.0.0.tgz#6fa3e6b666271a8ca3877c82cbce380a2002073e"
+  integrity sha512-ien1kU0t4kQ2jpqQFVpu9ULJQWQpjB2e3B8jF/JYqRVSJyUInso68RMMlpk9T9mpvhy+gq+5D7raJg4Vy1P7fA==
 
 "@sinonjs/commons@^1.7.0":
   version "1.8.0"
@@ -4033,9 +4033,9 @@ throat@^5.0.0:
   integrity sha512-fcwX4mndzpLQKBS1DVYhGAcYaYt7vsHNIvQV+WXMvnow5cgjPphq5CaayLaGsjRdSCKZFNGt7/GYAuXaNOiYCA==
 
 tmpl@1.0.x:
-  version "1.0.4"
-  resolved "https://registry.yarnpkg.com/tmpl/-/tmpl-1.0.4.tgz#23640dd7b42d00433911140820e5cf440e521dd1"
-  integrity sha1-I2QN17QtAEM5ERQIIOXPRA5SHdE=
+  version "1.0.5"
+  resolved "https://registry.yarnpkg.com/tmpl/-/tmpl-1.0.5.tgz#8683e0b902bb9c20c4f726e3c0b69f36518c07cc"
+  integrity sha512-3f0uOEAQwIqGuWW2MVzYg8fV/QNnc/IpuJNG837rLuczAaLVHslWHZQj4IGiEl5Hs3kkbhwL9Ab7Hrsmuj+Smw==
 
 to-fast-properties@^2.0.0:
   version "2.0.0"
