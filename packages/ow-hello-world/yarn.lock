@@ -464,10 +464,10 @@
     "@types/yargs" "^15.0.0"
     chalk "^4.0.0"
 
-"@ow-framework/core@^3.0.2":
-  version "3.0.2"
-  resolved "https://registry.yarnpkg.com/@ow-framework/core/-/core-3.0.2.tgz#fc94761caf9aa81d04eba8d9db2e8101cb797f27"
-  integrity sha512-j9Q46is/t8ZD2q+7HpL9ddJv1SFkgCz3NhdLOAVu2ZY192JeIpE8A90JRfkomjd1D2mNon+/cCr6FKTN83IKoA==
+"@ow-framework/core@^4.0.0":
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/@ow-framework/core/-/core-4.0.0.tgz#6fa3e6b666271a8ca3877c82cbce380a2002073e"
+  integrity sha512-ien1kU0t4kQ2jpqQFVpu9ULJQWQpjB2e3B8jF/JYqRVSJyUInso68RMMlpk9T9mpvhy+gq+5D7raJg4Vy1P7fA==
 
 "@sinonjs/commons@^1.7.0":
   version "1.8.0"
@@ -2785,9 +2785,9 @@ punycode@^2.1.0, punycode@^2.1.1:
   integrity sha512-XRsRjdf+j5ml+y/6GKHPZbrF/8p2Yga0JPtdqTIY2Xe5ohJPD9saDJJLPvp9+NSBprVvevdXZybnj2cv8OEd0A==
 
 qs@~6.5.2:
-  version "6.5.2"
-  resolved "https://registry.yarnpkg.com/qs/-/qs-6.5.2.tgz#cb3ae806e8740444584ef154ce8ee98d403f3e36"
-  integrity sha512-N5ZAX4/LxJmF+7wN74pUD6qAh9/wnvdQcjq9TZjevvXzSUo7bfmw91saqMjzGS2xq91/odN2dW/WOl7qQHNDGA==
+  version "6.5.3"
+  resolved "https://registry.yarnpkg.com/qs/-/qs-6.5.3.tgz#3aeeffc91967ef6e35c0e488ef46fb296ab76aad"
+  integrity sha512-qxXIEh4pCGfHICj1mAJQ2/2XVZkjCDTcEgfoSQxc/fYivUZxTkk7L3bDBJSoNrEzXI17oUO5Dp07ktqE5KzczA==
 
 react-is@^16.12.0:
   version "16.13.1"
